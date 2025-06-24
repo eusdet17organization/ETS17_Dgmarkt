@@ -20,6 +20,7 @@ public class LoginStepDefs {
     public void user_enters_valid_credentials() {
         loginPanelPage.loginPanel();
     }
+
     @Then("User verifies that main page is visible")
     public void user_verifies_that_main_page_is_visible() {
         Assert.assertTrue(Driver.get().getTitle().equals("Your Store"));
