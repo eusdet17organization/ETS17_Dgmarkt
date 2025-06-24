@@ -18,5 +18,7 @@ public class LoginStepDefs {
     @Then("User verifies that main page is visible")
     public void user_verifies_that_main_page_is_visible() {
 
+
+
     }
 }
