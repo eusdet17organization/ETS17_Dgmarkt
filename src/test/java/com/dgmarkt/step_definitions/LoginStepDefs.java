@@ -19,5 +19,6 @@ public class LoginStepDefs {
     public void user_verifies_that_main_page_is_visible() {
 
 
+
     }
 }
