@@ -490,4 +490,13 @@ public class BrowserUtils {
     }
 
 
+    public static List<String> getElementsPlaceholder(List<WebElement> list) {
+        List<String> placeholderTexts = new ArrayList<>();
+        for (WebElement el : list) {
+            placeholderTexts.add(el.getAttribute("placeholder"));
+        }
+        return placeholderTexts;
+    }
+
+
 }
