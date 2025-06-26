@@ -22,8 +22,6 @@ public abstract class BasePage {
     public WebElement registerText;
 
 
-
-
     @FindBy(xpath = "//*[@id=\"top-links\"]/ul/li/a/span")
     public WebElement myAccountButton;
 
