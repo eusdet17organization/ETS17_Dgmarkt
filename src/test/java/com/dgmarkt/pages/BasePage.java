@@ -14,19 +14,14 @@ public abstract class BasePage {
 
     protected Select select;
 
-
-    @FindBy(xpath = "//span[text()='My Account']")
+    @FindBy(xpath = "//*[@id=\"top-links\"]/ul/li/a/span")
     public WebElement myAccountDropdown;
 
     @FindBy(id = "pt-register-link")
-    public WebElement registerText;
-
-
-    @FindBy(xpath = "//*[@id=\"top-links\"]/ul/li/a/span")
-    public WebElement myAccountButton;
+    public WebElement myAccountRegisterText;
 
     @FindBy(xpath = "//*[@id=\"pt-login-link\"]")
-    public WebElement myAccountLoginButton;
+    public WebElement myAccountLoginText;
 
 
 }
