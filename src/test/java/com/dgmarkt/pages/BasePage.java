@@ -23,5 +23,14 @@ public abstract class BasePage {
     @FindBy(xpath = "//*[@id=\"pt-login-link\"]")
     public WebElement myAccountLoginText;
 
+    @FindBy(id = "search-by-category")
+    public WebElement searchIcon;
+
+    @FindBy(id = "btn-search-category")
+    public WebElement searchIconWithSearchText;
+
+    @FindBy(id = "text-search")
+    public WebElement searchText;
+
 
 }
