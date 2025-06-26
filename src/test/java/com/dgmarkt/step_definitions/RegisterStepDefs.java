@@ -1,33 +1,29 @@
 package com.dgmarkt.step_definitions;
 
-import com.dgmarkt.pages.BasePage;
 import com.dgmarkt.pages.RegisterPage;
 import com.dgmarkt.utilities.BrowserUtils;
 import com.dgmarkt.utilities.Driver;
 import com.github.javafaker.Faker;
-import io.cucumber.java.bs.A;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 
-import javax.swing.*;
 import java.util.List;
 
 public class RegisterStepDefs {
 
     RegisterPage registerPage = new RegisterPage();
     Faker faker = new Faker();
-    WebElement warningMessageElement;
+
 
 
     @Given("User navigate the register account page")
     public void user_navigate_the_register_account_page() {
         registerPage.myAccountDropdown.click();
-        registerPage.registerText.click();
+        registerPage.myAccountRegisterText.click();
     }
 
     @When("User fills in mandatory fields")

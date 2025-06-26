@@ -3,12 +3,9 @@ package com.dgmarkt.pages;
 import com.dgmarkt.utilities.BrowserUtils;
 import com.dgmarkt.utilities.ConfigurationReader;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.dgmarkt.utilities.Driver.driver;
 
@@ -29,8 +26,8 @@ public class LoginPage extends BasePage {
 
 
     public void userLogin() {
-        myAccountButton.click();
-        myAccountLoginButton.click();
+        myAccountDropdown.click();
+        myAccountLoginText.click();
         myAccountLoginEmailAddressBox.sendKeys(ConfigurationReader.get("userEmailAddress"));
         myAccountLoginPasswordBox.sendKeys(ConfigurationReader.get("userPassword"));
         myAccountLoginButtonSubmit.click();
