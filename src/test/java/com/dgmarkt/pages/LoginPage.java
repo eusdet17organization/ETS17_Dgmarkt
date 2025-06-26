@@ -4,19 +4,16 @@ import com.dgmarkt.utilities.BrowserUtils;
 import com.dgmarkt.utilities.ConfigurationReader;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static com.dgmarkt.utilities.Driver.driver;
+
 
 public class LoginPage extends BasePage {
-
-    @FindBy(xpath = "//*[@id=\"top-links\"]/ul/li/a/span")
-    public WebElement myAccountButton;
-
-    @FindBy(xpath = "//*[@id=\"pt-login-link\"]")
-    public WebElement myAccountLoginButton;
 
     @FindBy(xpath = "//*[@id=\"input-email\"]")
     public WebElement myAccountLoginEmailAddressBox;
@@ -39,7 +36,12 @@ public class LoginPage extends BasePage {
         myAccountLoginButtonSubmit.click();
     }
 
-    public String verifyWelcomeMessage() {
-        return BrowserUtils.getText(loginSuccessfulMessage);
+    public String verifyWelcomeMessage(){
+        BrowserUtils.waitForVisibility(loginSuccessfulMessage, 5);
+        WebElement confirmationPopUp = driver.findElement(By.cssSelector(".alert.alert-success"));
+        String actual = confirmationPopUp.getText();
+        String expected = "Congratulation! Login Successfully\n" +"×";
+        Assert.assertEquals(actual, expected);
+        return BrowserUtils.getText(confirmationPopUp);
     }
 }
