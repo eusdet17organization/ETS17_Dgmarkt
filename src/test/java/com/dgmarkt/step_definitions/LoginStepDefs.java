@@ -2,6 +2,7 @@ package com.dgmarkt.step_definitions;
 
 import com.dgmarkt.pages.LoginPage;
 import com.dgmarkt.pages.LoginPanelPage;
+import com.dgmarkt.pages.MainPage;
 import com.dgmarkt.utilities.ConfigurationReader;
 import com.dgmarkt.utilities.Driver;
 import io.cucumber.java.en.Given;
@@ -12,7 +13,11 @@ import org.junit.Assert;
 public class LoginStepDefs {
 
     LoginPanelPage loginPanelPage=new LoginPanelPage();
+
+    MainPage mainPage=new MainPage();
+
     LoginPage loginPage = new LoginPage();
+
 
     @Given("User is on the login page")
     public void user_is_on_the_login_page() {
@@ -21,6 +26,7 @@ public class LoginStepDefs {
     @When("User enters valid credentials")
     public void user_enters_valid_credentials() {
         loginPanelPage.loginPanel();
+        mainPage.closePopUp();
     }
 
     @Then("User verifies that main page is visible")

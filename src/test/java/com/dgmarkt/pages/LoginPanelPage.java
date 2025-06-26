@@ -25,8 +25,6 @@ public class LoginPanelPage extends BasePage{
         emailBox.sendKeys(ConfigurationReader.get("mainUsername"));
         passwordBox.sendKeys(ConfigurationReader.get("mainPassword"));
         loginButton.click();
-
-        Driver.get().findElement(By.xpath("//a[@class='a-close-newsletter']")).click();
     }
 
 }
