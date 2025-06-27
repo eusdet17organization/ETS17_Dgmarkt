@@ -1,4 +1,6 @@
 package com.dgmarkt.pages;
 
-public class CartIconPage {
+public class CartIconPage extends BasePage {
+
+
 }
