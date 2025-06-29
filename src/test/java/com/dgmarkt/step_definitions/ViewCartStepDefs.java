@@ -9,8 +9,9 @@ public class ViewCartStepDefs {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
-    @Then("The user sees the “Shopping Cart” banner and accesses the cart")
-    public void the_user_sees_the_shopping_cart_banner_and_accesses_the_cart() {
+    @Then("The user sees the {string} banner and accesses the cart")
+    public void the_user_sees_the_banner_and_accesses_the_cart(String string) {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();}
+        throw new io.cucumber.java.PendingException();
+    }
     }
