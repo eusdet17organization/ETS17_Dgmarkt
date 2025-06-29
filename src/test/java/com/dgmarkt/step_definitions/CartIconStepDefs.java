@@ -1,34 +1,55 @@
 package com.dgmarkt.step_definitions;
 
-import com.dgmarkt.pages.LoginPage;
-import com.dgmarkt.pages.LoginPanelPage;
-import com.dgmarkt.pages.MainPage;
+import com.dgmarkt.pages.*;
+import com.dgmarkt.utilities.BrowserUtils;
+import com.dgmarkt.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CartIconStepDefs {
 
-    LoginPanelPage loginPanelPage=new LoginPanelPage();
 
-    MainPage mainPage=new MainPage();
 
-    LoginPage loginPage = new LoginPage();
+    SearchPage searchPage=new SearchPage();
+
+    CartIconPage cartIconPage = new CartIconPage();
+
     @Given("User clicks on cart icon")
     public void user_clicks_on_cart_icon() {
-
-        throw new io.cucumber.java.PendingException();
+        cartIconPage.clickCartIcon();
     }
     @Then("{string} must see your message")
     public void must_see_your_message(String string) {
+        Assert.assertTrue(Driver.get().findElement(By.cssSelector("p.text-center")).isDisplayed());
+        System.out.println(cartIconPage.getEmptyCartMessage());
 
-        throw new io.cucumber.java.PendingException();}
+
+        }
 
 
     @When("User adds a product to cart")
     public void user_adds_a_product_to_cart() {
+        BrowserUtils.waitForClickablility(cartIconPage.searchButton, 10);
+        cartIconPage.searchButton.click();
 
-        throw new io.cucumber.java.PendingException();
+        BrowserUtils.waitForVisibility(cartIconPage.searchInput, 10);
+        cartIconPage.searchInput.clear();
+        cartIconPage.searchInput.sendKeys("Belkin Standard HDMI cable");
+        cartIconPage.searchInput.sendKeys(Keys.ENTER);
+
+        BrowserUtils.waitFor(2);
+        cartIconPage.productImage.click();
+
+
+
+
     }
 
     @Then("{string} message is displayed")
