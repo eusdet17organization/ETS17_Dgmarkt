@@ -8,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 public class MainPage extends BasePage{
     @FindBy(xpath = "//a[@class='a-close-newsletter']")
     public WebElement popUpButton;
+    @FindBy(xpath = "//div[@class='container-inner']/h1")
+    public WebElement subCategoryTitle;
 
     public void closePopUp() {
         popUpButton.click();
