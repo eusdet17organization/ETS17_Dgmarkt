@@ -32,5 +32,8 @@ public abstract class BasePage {
     @FindBy(id = "text-search")
     public WebElement searchText;
 
+    @FindBy(xpath = "//span[text()='Currency']")
+    public WebElement currencyText;
+
 
 }

@@ -29,7 +29,7 @@ public class SearchStepDefs {
     public void user_verifies_results(String product) {
         List<String> searchProduct = BrowserUtils.getElementsText(searchPage.productName);
         for (String s:searchProduct){
-            Assert.assertTrue(s.toLowerCase().contains(product.toLowerCase()));
+            Assert.assertTrue(s.toLowerCase().contains(product.toLowerCase().trim()));
         }
     }
 
