@@ -20,4 +20,15 @@ public class CategoryStepDefs {
         Assert.assertEquals(subCategory + " subcategory page is not displayed", subCategory, actualTitle);
 
     }
+    @When("The user clicks on the {string} subcategory with hover.")
+    public void the_user_clicks_on_the_subcategory_with_hover(String subCategory) {
+        mainPage.clickSubButtonWithHover(subCategory);
+
+    }
+    @Then("The user verifies that the {string} subcategory page is displayed with hover.")
+    public void the_user_verifies_that_the_subcategory_page_is_displayed_with_hover(String subCategory) {
+        String actualTitle = mainPage.subCategoryTitle.getText();
+        Assert.assertEquals(subCategory + " subcategory page is not displayed with hover", subCategory, actualTitle);
+    }
+
 }
