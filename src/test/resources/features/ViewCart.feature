@@ -1,9 +1,15 @@
 Feature: Access the cart from the "View Cart" button
 
 
-  Background : Login and adds to cart product
+  Background:
+    Given User is on the login page
+    Given User enters valid credentials
+    Given User verifies that main page is visible
     When User adds a product to cart
     And  User clicks on cart icon
+
+
+
 
 
     Scenario: Verify that the user should be able to access the cart from the view cart button
