@@ -8,17 +8,20 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.concurrent.TimeoutException;
 
 public class CartIconStepDefs {
 
 
-
-    SearchPage searchPage=new SearchPage();
-
+    MainPage mainPage = new MainPage();
     CartIconPage cartIconPage = new CartIconPage();
 
     @Given("User clicks on cart icon")
@@ -29,51 +32,71 @@ public class CartIconStepDefs {
     public void must_see_your_message(String string) {
         Assert.assertTrue(Driver.get().findElement(By.cssSelector("p.text-center")).isDisplayed());
         System.out.println(cartIconPage.getEmptyCartMessage());
-
-
-        }
+    }
 
 
     @When("User adds a product to cart")
     public void user_adds_a_product_to_cart() {
-        BrowserUtils.waitForClickablility(cartIconPage.searchButton, 10);
-        cartIconPage.searchButton.click();
-
-        BrowserUtils.waitForVisibility(cartIconPage.searchInput, 10);
-        cartIconPage.searchInput.clear();
-        cartIconPage.searchInput.sendKeys("Belkin Standard HDMI cable");
-        cartIconPage.searchInput.sendKeys(Keys.ENTER);
-
-        BrowserUtils.waitFor(2);
-        cartIconPage.productImage.click();
-
-
-
-
+        mainPage.clickMainButton("Category");
+        mainPage.clickSubButton("Televisions");
+        cartIconPage.addTheProductCartWithHover(5);
     }
 
     @Then("{string} message is displayed")
     public void message_is_displayed(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        cartIconPage.verifySuccessMessage();
+        String successMessage = cartIconPage.getSuccessMessageText();
+        Assert.assertTrue("Success message should be displayed", !successMessage.isEmpty());
+        System.out.println("Success Message: " + successMessage);
     }
 
 
     @Then("User should see added product in cart")
-    public void user_should_see_added_product_in_cart() {
+    public void user_should_see_added_product_in_cart() throws InterruptedException {
+        // Success message'ı kapat
+        try {
+            WebElement closeButton = Driver.get().findElement(By.cssSelector(".alert-success .close"));
+            closeButton.click();
+        } catch (Exception e) {
+            // Mesaj zaten kapanmiyor
+        }
 
-        throw new io.cucumber.java.PendingException();
+        BrowserUtils.waitFor(1);
+        cartIconPage.clickCartIcon();
+
+        BrowserUtils.waitFor(30);
+
     }
+
     @Then("Product name, price and quantity should be displayed correctly")
     public void product_name_price_and_quantity_should_be_displayed_correctly() {
+        BrowserUtils.waitFor(2);
+        // Büyük-küçük harf
+        Assert.assertTrue("Product name is incorrect!",
+                cartIconPage.getProductName().equalsIgnoreCase("Cello C4020G 40\" Smart LED TV"));
 
-        throw new io.cucumber.java.PendingException();
+        Assert.assertEquals("Product quantity is incorrect!",
+                "1",
+                cartIconPage.getQuantity());
+
+        Assert.assertEquals("Product price is incorrect!",
+                "$158.00",
+                cartIconPage.getPrice());
+
+        // dogrulama mesajlari
+        System.out.println(" : Product details have been successfully verified:");
+        System.out.println(" : Name: " + cartIconPage.getProductName());
+        System.out.println(" : Quantity: " + cartIconPage.getQuantity());
+        System.out.println(" : Price: " + cartIconPage.getPrice() + " ");
+
     }
+
 
     @Then("User clicks the “Remove” button")
     public void user_clicks_the_remove_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        cartIconPage.clickRemoveButton();
+        cartIconPage.clickCartIcon();
+        System.out.println("cartIconPage.getEmptyCartMessage() = " + cartIconPage.getEmptyCartMessage());
     }
 
 }
