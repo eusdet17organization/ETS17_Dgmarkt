@@ -205,9 +205,6 @@ public class ShoppingCartPage extends BasePage {
             System.out.println("actualMessage = " + actualMessage);
     }
 
-
-
-
     public void selectCountry() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(countrySelect));
