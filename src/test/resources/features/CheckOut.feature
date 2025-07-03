@@ -9,7 +9,7 @@ Feature: Checkout page and completion of payment
 
 
 
-
+@wip
   Scenario: Go to the checkout page from the cart icon and complete the checkout process
     When  User clicks the "Checkout" button
     Then  The user fills in the "Billing Details" page and clicks "Continue" button.
