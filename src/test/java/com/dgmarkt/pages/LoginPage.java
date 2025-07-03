@@ -27,6 +27,21 @@ public class LoginPage extends BasePage {
     @FindBy(css = ".alert.alert-danger")
     public WebElement loginErrorMessage;
 
+    @FindBy(xpath = "//*[@id=\"ajax-login-form\"]/div[2]/a")
+    public WebElement forgottenPasswordButton;
+
+    @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/ul/li[3]/a")
+    public WebElement forgottenPasswordText;
+
+    @FindBy(xpath = "//*[@id=\"input-email\"]")
+    public WebElement eMailAddressBox;
+
+    @FindBy(xpath = "//*[@id=\"content\"]/form/div/div[2]/input")
+    public WebElement forgottenPasswordContinueButton;
+
+    @FindBy(xpath = "//*[@id=\"account-login\"]/div[1]")
+    public WebElement forgottenPasswordConfirmationMessage;
+
 
     public void userLogin() {
         myAccountDropdown.click();
@@ -61,4 +76,6 @@ public class LoginPage extends BasePage {
         Assert.assertEquals(actual, expected);
         return BrowserUtils.getText(errorMessage);
     }
+
+
 }
