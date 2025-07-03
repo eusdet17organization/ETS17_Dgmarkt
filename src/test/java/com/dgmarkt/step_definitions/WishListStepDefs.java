@@ -1,6 +1,7 @@
 package com.dgmarkt.step_definitions;
 
 
+import com.dgmarkt.utilities.Driver;
 import org.junit.Assert;
 import com.dgmarkt.pages.LoginPage;
 import com.dgmarkt.pages.LoginPanelPage;
@@ -26,8 +27,12 @@ public class WishListStepDefs {
 
     @Then("user clicks from category to television")
     public void user_clicks_from_category_to_television() {
+        loginPage.userLogin();
+        BrowserUtils.waitFor(5);
         mainPage.clickMainButton("Category");
+
         mainPage.clickSubButton("Televisions");
+
     }
     @When("User hovers over the product and clicks the wish list button")
     public void user_hovers_over_the_product_and_clicks_the_wish_list_button() {
@@ -52,17 +57,13 @@ public class WishListStepDefs {
     public void user_confirms_that_the_product_has_been_added_to_the_wish_list() {
         BrowserUtils.waitFor(5);
        wistListPage.clickWishList();
-        loginPanelPage.loginPanel();
-
-    }
-
-    @When("the user clicks the close button on the top right of the product")
-    public void the_user_clicks_the_close_button_on_the_top_right_of_the_product() {
         Assert.assertTrue("Product name is incorrect!",
-                wistListPage.getProductName().equalsIgnoreCase("Daewoo D24RTSDVD 24 \" "));
+        wistListPage.getProductName().equalsIgnoreCase("Daewoo D24RTSDVD 24\" Smart LED TV With DVD"));
         System.out.println(" : Product details have been successfully verified:");
         System.out.println(" : Name: " + wistListPage.getProductName());
+
     }
+
     @Then("user confirms that the base has been deleted")
     public void user_confirms_that_the_base_has_been_deleted() {
         BrowserUtils.hover(wistListPage.removeButton);
@@ -72,10 +73,19 @@ public class WishListStepDefs {
     }
     @Then("user  {string} sees your message")
     public void user_sees_your_message(String string) {
+        Assert.assertTrue(Driver.get().findElement(By.cssSelector("#account-wishlist > div.alert.alert-success.alert-dismissible")).isDisplayed());
+        System.out.println(wistListPage.getModifiedMassage());
+    }
+
+    @Then("User adds the product in the wist list to the cart")
+    public void user_adds_the_product_in_the_wist_list_to_the_cart() {
 
     }
 
+    @Then("User confirms that the product has been added to the cart")
+    public void user_confirms_that_the_product_has_been_added_to_the_cart() {
 
+    }
 
 
 }

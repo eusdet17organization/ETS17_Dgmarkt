@@ -32,10 +32,14 @@ public class WistListPage extends BasePage{
     public WebElement networking;
     @FindBy(xpath = "//button[@title='Add to Wish List']")
     public WebElement wishListad;
-    @FindBy(css = "[class='alert alert-fix alert-success alert-dismissible']")
+    @FindBy(css = "#account-wishlist > div.alert.alert-success.alert-dismissible")
     public WebElement verifyend;
 
-    @FindBy(xpath = "//td[@class='text-left' and text()='Product Name']")
+    public String getModifiedMassage(){
+        return verifyend.getText();
+    }
+
+    @FindBy(css = "#content > div.table-responsive > table > tbody > tr > td:nth-child(3)")
     public WebElement getProduckNameWl;
 
     public String getProductName() {
