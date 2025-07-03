@@ -5,7 +5,7 @@ Feature: Login Scenarios
     When  User enters valid credentials
     Then  User verifies that main page is visible
 
-
+  @wip
   Scenario Outline: SubCategory Selection
     When  The user clicks on the "<subcategory>" subcategory.
     Then  The user verifies that the "<subcategory>" subcategory page is displayed.
@@ -16,7 +16,7 @@ Feature: Login Scenarios
       | TV Accessories  |
       | Networking      |
 
-    @wip
+  @wip
   Scenario Outline: SubCategory Selection with hover
     When  The user clicks on the "<subcategory>" subcategory with hover.
     Then  The user verifies that the "<subcategory>" subcategory page is displayed with hover.
