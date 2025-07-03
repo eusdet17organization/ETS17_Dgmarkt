@@ -45,7 +45,7 @@ Feature: Login Functionality
   @wip
   Scenario Outline: Forgotten Password Test
     When The user clicks on My Account button and clicks on Login button
-    Then The user clicks on Forgotten Pasword Button
+    Then The user clicks on Forgotten Password Button
     Then The user verifies Forgotten Password Text
     Then The user enters "<E-Mail Address>" in the E-Mail Address field
     And The user clicks on Continue Button

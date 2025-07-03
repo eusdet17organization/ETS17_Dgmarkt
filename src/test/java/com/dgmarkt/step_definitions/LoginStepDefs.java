@@ -72,8 +72,8 @@ public class LoginStepDefs extends BasePage {
         myAccountLoginText.click();
     }
 
-    @Then("The user clicks on Forgotten Pasword Button")
-    public void the_user_clicks_on_forgotten_pasword_button() {
+    @Then("The user clicks on Forgotten Password Button")
+    public void the_user_clicks_on_forgotten_password_button() {
         loginPage.forgottenPasswordButton.click();
     }
 
