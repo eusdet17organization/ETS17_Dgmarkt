@@ -42,6 +42,14 @@ public class WistListPage extends BasePage{
     @FindBy(css = "#content > div.table-responsive > table > tbody > tr > td:nth-child(3)")
     public WebElement getProduckNameWl;
 
+    @FindBy(css = "#cart > ul > li:nth-child(1) > table > tbody > tr > td.text-left.cart-info > a")
+    private WebElement productNameInCart;
+
+    public String getProductNameinCartİcon() {
+        BrowserUtils.waitForVisibility(productNameInCart, 10);
+        return productNameInCart.getText().trim();
+    }
+
     public String getProductName() {
         BrowserUtils.waitForVisibility(getProduckNameWl, 10);
         return getProduckNameWl.getText().trim();
