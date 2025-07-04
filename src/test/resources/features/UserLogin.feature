@@ -42,7 +42,7 @@ Feature: Login Functionality
       | test.%&*+@test.com                                                                                            | Asdf.123                                                                                             |
       | test. test@test.com                                                                                           | Asdf.123                                                                                             |
 
-  @wip
+
   Scenario Outline: Forgotten Password Test
     When The user clicks on My Account button and clicks on Login button
     Then The user clicks on Forgotten Password Button
