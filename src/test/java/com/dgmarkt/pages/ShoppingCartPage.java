@@ -244,6 +244,25 @@ public class ShoppingCartPage extends BasePage {
         selectRegion();
 
     }
+    //-----------------------------------General checkoutpage------------------------------------//
+
+    @FindBy(id = "button-payment-address")
+    public WebElement billingDetailsContinueButton;
+
+    @FindBy(id = "button-shipping-address")
+    public WebElement deliverDetailsContinueButton;
+
+    @FindBy(id = "button-shipping-method")
+    public WebElement deliveryMethodContinueButton;
+
+    @FindBy(xpath = "//input[@type='checkbox']")
+    public WebElement TermsAndConditionsCheckbox;
+
+    @FindBy(xpath = "button-payment-method")
+    public WebElement paymentMethodContinueButton;
+
+    @FindBy(css = "button-confirm")
+    public WebElement confirmOrderButton;
 
 
 }
