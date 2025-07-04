@@ -1,12 +1,9 @@
 package com.dgmarkt.step_definitions;
 
 
+import com.dgmarkt.pages.*;
 import com.dgmarkt.utilities.Driver;
 import org.junit.Assert;
-import com.dgmarkt.pages.LoginPage;
-import com.dgmarkt.pages.LoginPanelPage;
-import com.dgmarkt.pages.MainPage;
-import com.dgmarkt.pages.WistListPage;
 import com.dgmarkt.utilities.BrowserUtils;
 
 import io.cucumber.java.en.Then;
@@ -18,6 +15,7 @@ import org.openqa.selenium.support.FindBy;
 import static com.dgmarkt.utilities.Driver.driver;
 
 public class WishListStepDefs {
+    CartIconPage cartIconPage =new CartIconPage();
     WistListPage wistListPage = new WistListPage();
     LoginPanelPage loginPanelPage=new LoginPanelPage();
 
@@ -79,12 +77,26 @@ public class WishListStepDefs {
 
     @Then("User adds the product in the wist list to the cart")
     public void user_adds_the_product_in_the_wist_list_to_the_cart() {
-
+    wistListPage.clickCart.click();
     }
+    @Then("User add to cart sees added pop-ups")
+    public void user_add_to_cart_sees_added_pop_ups() {
+        String actualMessage = wistListPage.getSuccessMessage();
+        String expectedMessage  = wistListPage.getSuccessMessageText();
+
+        Assert.assertTrue("Success message is not displayed!", actualMessage.contains(expectedMessage));
+
+        System.out.println("Success Message: " + actualMessage);
+    }
+
 
     @Then("User confirms that the product has been added to the cart")
     public void user_confirms_that_the_product_has_been_added_to_the_cart() {
-
+        cartIconPage.clickCartIcon();
+        Assert.assertTrue("Product name is incorrect!",
+        wistListPage.getProductNameinCartİcon().equalsIgnoreCase("Daewoo D24RTSDVD 24\" Smart LED TV With DVD"));
+        System.out.println(" : Product details have been successfully verified:");
+        System.out.println(" : Name: " + wistListPage.getProductNameinCartİcon());
     }
 
 
