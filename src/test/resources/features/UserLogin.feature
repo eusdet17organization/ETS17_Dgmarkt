@@ -42,7 +42,7 @@ Feature: Login Functionality
       | test.%&*+@test.com                                                                                            | Asdf.123                                                                                             |
       | test. test@test.com                                                                                           | Asdf.123                                                                                             |
 
-  @wip
+
   Scenario Outline: Forgotten Password Test
     When The user clicks on My Account button and clicks on Login button
     Then The user clicks on Forgotten Password Button
@@ -53,4 +53,15 @@ Feature: Login Functionality
     Examples:
       | E-Mail Address     |
       | test.test@test.com |
+
+  @wip
+  Scenario Outline:Login with incorrect credentials - Five failed Entry Test
+    When The user clicks on My Account button and clicks on Login button after enters "<E-Mail Address>" and "<Password>" five attempts
+    And The user verifies the message after the fifth failed login
+    Examples:
+      | E-Mail Address       | Password |
+      | test.test01@test.com | Asdf.%&* |
+
+
+
     
