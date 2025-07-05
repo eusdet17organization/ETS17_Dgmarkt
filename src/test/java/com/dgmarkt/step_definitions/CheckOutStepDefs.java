@@ -1,5 +1,6 @@
 package com.dgmarkt.step_definitions;
 
+import com.dgmarkt.pages.LoginPage;
 import com.dgmarkt.pages.ShoppingCartPage;
 import com.dgmarkt.utilities.Driver;
 import io.cucumber.java.en.Then;
@@ -11,6 +12,7 @@ import java.time.Duration;
 
 public class CheckOutStepDefs {
 
+   LoginPage loginPage = new LoginPage();
    ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
 
 
@@ -34,8 +36,6 @@ public class CheckOutStepDefs {
     }
     @Then("Select {string} on the {string} page and click on the {string} button.")
     public void select_on_the_page_and_click_on_the_button(String string, String string2, String string3) {
-
-
      shoppingCartPage.clickDeliveryMethodContinueButton();
 
     }
@@ -61,6 +61,5 @@ public class CheckOutStepDefs {
 
 
     }
-
 
 }
