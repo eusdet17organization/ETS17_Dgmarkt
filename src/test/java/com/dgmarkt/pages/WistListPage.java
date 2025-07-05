@@ -34,6 +34,8 @@ public class WistListPage extends BasePage{
     public WebElement wishListad;
     @FindBy(css = "#account-wishlist > div.alert.alert-success.alert-dismissible")
     public WebElement verifyend;
+    @FindBy(css = "#product-category > div.alert.alert-fix.alert-success.alert-dismissible > a:nth-child(2)")
+    public WebElement loginWishList;
 
     public String getModifiedMassage(){
         return verifyend.getText();
@@ -45,6 +47,21 @@ public class WistListPage extends BasePage{
     @FindBy(css = "#cart > ul > li:nth-child(1) > table > tbody > tr > td.text-left.cart-info > a")
     private WebElement productNameInCart;
 
+    @FindBy(xpath = "//*[@id=\"input-email\"]")
+    public WebElement wishListLoginEmailAddressBox;
+
+    @FindBy(xpath = "//*[@id=\"input-password\"]")
+    public WebElement wishListRemoveLoginPasswordBox;
+    @FindBy(css = "#content > div > div:nth-child(2) > div > form > input")
+    public WebElement wishListLoginButtonSubmit;
+    public void userLoginWishList() {
+
+
+
+        wishListLoginEmailAddressBox.sendKeys(ConfigurationReader.get("userEmailAddress"));
+        wishListRemoveLoginPasswordBox.sendKeys(ConfigurationReader.get("userPassword"));
+        wishListLoginButtonSubmit.click();
+}
     public String getProductNameinCartİcon() {
         BrowserUtils.waitForVisibility(productNameInCart, 10);
         return productNameInCart.getText().trim();
@@ -140,6 +157,22 @@ public class WistListPage extends BasePage{
 
         // Mesaj metnini döndür
         return successMessage.getText();
+    }
+    public void clickLoginLinkWithJS() {
+        try {
+
+            // Login linkini bul
+            WebElement loginLink = new WebDriverWait(Driver.get(), Duration.ofSeconds(5))
+                    .until(ExpectedConditions.presenceOfElementLocated(
+                            By.xpath("//a[contains(text(),'login')]")
+                    ));
+
+            // JS ile tıkla
+            ((JavascriptExecutor) Driver.get()).executeScript("arguments[0].click();", loginLink);
+
+        } catch (Exception e) {
+            System.out.println("Login linki bulunamadı veya tıklanamadı: " + e.getMessage());
+        }
     }
 
 }
