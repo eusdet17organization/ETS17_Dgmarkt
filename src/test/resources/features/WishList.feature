@@ -45,7 +45,7 @@ Feature: Wist List
      Then  User confirms that the product has been added to the wish list
      Then user confirms that the base has been deleted
      Then user  " Success: You have modified your wish list! " sees your message
-  @wip
+
   Scenario:wish list add products to cart
     Then  user clicks on category and television
     When  User hovers over the product and clicks the wish list button
