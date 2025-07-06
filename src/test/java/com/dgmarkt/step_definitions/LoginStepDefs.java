@@ -4,12 +4,21 @@ import com.dgmarkt.pages.BasePage;
 import com.dgmarkt.pages.LoginPage;
 import com.dgmarkt.pages.LoginPanelPage;
 import com.dgmarkt.pages.MainPage;
+import com.dgmarkt.utilities.BrowserUtils;
 import com.dgmarkt.utilities.ConfigurationReader;
 import com.dgmarkt.utilities.Driver;
+import io.cucumber.java.bs.A;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+
+import org.openqa.selenium.WebElement;
+
+import static com.dgmarkt.utilities.Driver.driver;
+
+import org.openqa.selenium.Alert;
+
 
 public class LoginStepDefs extends BasePage {
 
@@ -97,6 +106,67 @@ public class LoginStepDefs extends BasePage {
     public void the_user_verifies_that_confirmation_message_is_displayed() {
         Assert.assertTrue(loginPage.forgottenPasswordConfirmationMessage.isDisplayed());
         Assert.assertEquals("An email with a confirmation link has been sent your email address.", loginPage.forgottenPasswordConfirmationMessage.getText());
+    }
+
+
+
+    @When("The user clicks on My Account button and clicks on Login button after enters {string} and {string} five attempts")
+    public void the_user_clicks_on_my_account_button_and_clicks_on_login_button_after_enters_and_five_attempts(String eMail, String password) {
+        loginPage.fiveLoginAttempts(eMail, password);
+    }
+
+    @When("The user verifies the message after the fifth failed login")
+    public void the_user_verifies_the_message_after_the_fifth_failed_login() {
+        Assert.assertTrue(loginPage.loginFiveAttemptsErrorMessage.isDisplayed());
+        Assert.assertEquals("Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.\n" + "×", loginPage.loginFiveAttemptsErrorMessage.getText());
+
+    /* User Logout Steps */
+    @When("The user clicks on My Account button and clicks on Logout button")
+    public void the_user_clicks_on_my_account_button_and_clicks_on_logout_button() {
+        myAccountDropdown.click();
+        loginPage.myAccountLogoutButton.click();
+    }
+
+    @Then("The user closes the Account Logout popup by clicking continue.")
+    public void the_user_closes_the_account_logout_popup_by_clicking_continue() {
+        loginPage.popupContinueButton.click();
+    }
+
+
+    /* User Logout Negative Test */
+    @Then("The user clicks on My Account button")
+    public void the_user_clicks_on_my_account_button() {
+        myAccountDropdown.click();
+    }
+
+    @Then("The user verifies that they are unable to log out by clicking the My Account button from the opened dropdown")
+    public void the_user_verifies_that_they_are_unable_to_log_out_by_clicking_the_my_account_button_from_the_opened_dropdown() {
+        loginPage.myAccountMyAccountButton.click();
+        Assert.assertTrue("Account", loginPage.myAccountAccountText.isDisplayed());
+        Assert.assertEquals("Account", loginPage.myAccountAccountText.getText());
+
+    }
+
+    @Then("The user verifies that they are unable to log out by clicking the Order History button from the opened dropdown")
+    public void the_user_verifies_that_they_are_unable_to_log_out_by_clicking_the_order_history_button_from_the_opened_dropdown() {
+        loginPage.myAccountOrderHistoryButton.click();
+        Assert.assertTrue("Order History", loginPage.myAccountOrderHistoryText.isDisplayed());
+        Assert.assertEquals("Order History", loginPage.myAccountOrderHistoryText.getText());
+    }
+
+    @Then("The user verifies that they are unable to log out by clicking the Transactions button from the opened dropdown")
+    public void the_user_verifies_that_they_are_unable_to_log_out_by_clicking_the_transactions_button_from_the_opened_dropdown() {
+        loginPage.myAccountTransactionsButton.click();
+        Assert.assertTrue("Your Transactions", loginPage.myAccountYourTransactionsText.isDisplayed());
+        Assert.assertEquals("Your Transactions", loginPage.myAccountYourTransactionsText.getText());
+    }
+
+    @Then("The user verifies that they are unable to log out by clicking the Downloads button from the opened dropdown")
+    public void the_user_verifies_that_they_are_unable_to_log_out_by_clicking_the_downloads_button_from_the_opened_dropdown() {
+        loginPage.myAccountDownloadsButton.click();
+        Assert.assertTrue("Downloads", loginPage.myAccountDownloadsText.isDisplayed());
+        Assert.assertEquals("Downloads", loginPage.myAccountDownloadsText.getText());
+
     }
 
 

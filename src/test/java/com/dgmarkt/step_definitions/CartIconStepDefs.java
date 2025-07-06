@@ -21,6 +21,7 @@ import java.util.concurrent.TimeoutException;
 public class CartIconStepDefs {
 
 
+    LoginPage loginPage = new LoginPage();
     MainPage mainPage = new MainPage();
     CartIconPage cartIconPage = new CartIconPage();
 
@@ -97,5 +98,8 @@ public class CartIconStepDefs {
         cartIconPage.clickCartIcon();
         System.out.println("cartIconPage.getEmptyCartMessage() = " + cartIconPage.getEmptyCartMessage());
     }
+
+
+
 
 }

@@ -132,6 +132,12 @@ public class CartIconPage extends BasePage {
         removeButton.click();
 
     }
+
+
+
+
+
+
 }
 
 
