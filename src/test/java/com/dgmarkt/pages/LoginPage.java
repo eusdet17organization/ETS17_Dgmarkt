@@ -42,11 +42,44 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"account-login\"]/div[1]")
     public WebElement forgottenPasswordConfirmationMessage;
 
+
     @FindBy(xpath = "//*[@id=\"content\"]/div[1]/div/div/div/div/div/div[3]/div[1]/div[2]/div/div/div")
     public WebElement loginFiveAttemptsErrorMessage;
 
     @FindBy(xpath = "/html/body/div[1]/div[3]/div[1]/div/div/div/div/div/div[3]/div[1]/div[1]/a")
     public WebElement closeLoginPage;
+
+    @FindBy(xpath = "//*[@id=\"pt-logout-link\"]")
+    public WebElement myAccountLogoutButton;
+
+    @FindBy(xpath = "//*[@id=\"content\"]/div[1]/div/div/div/div/div/div[3]/div[4]/div/div/div/div[2]/div/button/span")
+    public WebElement popupContinueButton;
+
+    @FindBy(xpath = "//*[@id=\"top-links\"]/ul/li/ul/li[1]/a")
+    public WebElement myAccountMyAccountButton;
+
+    @FindBy(xpath = "//*[@id=\"top-links\"]/ul/li/ul/li[2]/a")
+    public WebElement myAccountOrderHistoryButton;
+
+    @FindBy(xpath = "//*[@id=\"top-links\"]/ul/li/ul/li[3]/a")
+    public WebElement myAccountTransactionsButton;
+
+    @FindBy(xpath = "//*[@id=\"top-links\"]/ul/li/ul/li[4]/a")
+    public WebElement myAccountDownloadsButton;
+
+    @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/ul/li[2]/a")
+    public WebElement myAccountAccountText;
+
+    @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/ul/li[3]/a")
+    public WebElement myAccountOrderHistoryText;
+
+    @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/ul/li[3]/a")
+    public WebElement myAccountYourTransactionsText;
+
+    @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/ul/li[3]/a")
+    public WebElement myAccountDownloadsText;
+
+
 
     public void userLogin() {
         myAccountDropdown.click();

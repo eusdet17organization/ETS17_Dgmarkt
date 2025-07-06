@@ -9,7 +9,7 @@ Feature: Checkout page and completion of payment
 
 
 
-@wip
+
   Scenario: Go to the checkout page from the cart icon and complete the checkout process
     When  User clicks the "Checkout" button
     Then  The user fills in the "Billing Details" page and clicks "Continue" button.
@@ -18,3 +18,9 @@ Feature: Checkout page and completion of payment
     Then  The user selects the "Payment Method" as cash and clicks on the "I have read and accept the Terms and Conditions" box without leaving a comment and clicks on the "Continue" button
     Then  The user checks the product in the "Confirm Order" section and clicks the "Confirm Order" button
     Then  The user completes the order and goes to the page with the message "Your order has been placed!"
+
+
+
+
+
+
