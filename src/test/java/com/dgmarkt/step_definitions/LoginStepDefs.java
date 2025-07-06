@@ -12,7 +12,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+
+import org.openqa.selenium.WebElement;
+
+import static com.dgmarkt.utilities.Driver.driver;
+
 import org.openqa.selenium.Alert;
+
 
 public class LoginStepDefs extends BasePage {
 
@@ -103,6 +109,17 @@ public class LoginStepDefs extends BasePage {
     }
 
 
+
+    @When("The user clicks on My Account button and clicks on Login button after enters {string} and {string} five attempts")
+    public void the_user_clicks_on_my_account_button_and_clicks_on_login_button_after_enters_and_five_attempts(String eMail, String password) {
+        loginPage.fiveLoginAttempts(eMail, password);
+    }
+
+    @When("The user verifies the message after the fifth failed login")
+    public void the_user_verifies_the_message_after_the_fifth_failed_login() {
+        Assert.assertTrue(loginPage.loginFiveAttemptsErrorMessage.isDisplayed());
+        Assert.assertEquals("Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.\n" + "×", loginPage.loginFiveAttemptsErrorMessage.getText());
+
     /* User Logout Steps */
     @When("The user clicks on My Account button and clicks on Logout button")
     public void the_user_clicks_on_my_account_button_and_clicks_on_logout_button() {
@@ -149,6 +166,7 @@ public class LoginStepDefs extends BasePage {
         loginPage.myAccountDownloadsButton.click();
         Assert.assertTrue("Downloads", loginPage.myAccountDownloadsText.isDisplayed());
         Assert.assertEquals("Downloads", loginPage.myAccountDownloadsText.getText());
+
     }
 
 

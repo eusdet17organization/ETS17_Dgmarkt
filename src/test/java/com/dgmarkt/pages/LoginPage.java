@@ -42,6 +42,13 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"account-login\"]/div[1]")
     public WebElement forgottenPasswordConfirmationMessage;
 
+
+    @FindBy(xpath = "//*[@id=\"content\"]/div[1]/div/div/div/div/div/div[3]/div[1]/div[2]/div/div/div")
+    public WebElement loginFiveAttemptsErrorMessage;
+
+    @FindBy(xpath = "/html/body/div[1]/div[3]/div[1]/div/div/div/div/div/div[3]/div[1]/div[1]/a")
+    public WebElement closeLoginPage;
+
     @FindBy(xpath = "//*[@id=\"pt-logout-link\"]")
     public WebElement myAccountLogoutButton;
 
@@ -71,6 +78,7 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/ul/li[3]/a")
     public WebElement myAccountDownloadsText;
+
 
 
     public void userLogin() {
@@ -105,6 +113,39 @@ public class LoginPage extends BasePage {
         String expected = "Warning: No match for E-Mail Address and/or Password.\n" + "×";
         Assert.assertEquals(actual, expected);
         return BrowserUtils.getText(errorMessage);
+    }
+
+    public void fiveLoginAttempts(String eMail, String password) {
+        myAccountDropdown.click();
+        myAccountLoginText.click();
+        myAccountLoginEmailAddressBox.sendKeys(eMail);
+        myAccountLoginPasswordBox.sendKeys(password);
+        myAccountLoginButtonSubmit.click();
+        closeLoginPage.click();
+        myAccountDropdown.click();
+        myAccountLoginText.click();
+        myAccountLoginEmailAddressBox.sendKeys(eMail);
+        myAccountLoginPasswordBox.sendKeys(password);
+        myAccountLoginButtonSubmit.click();
+        closeLoginPage.click();
+        myAccountDropdown.click();
+        myAccountLoginText.click();
+        myAccountLoginEmailAddressBox.sendKeys(eMail);
+        myAccountLoginPasswordBox.sendKeys(password);
+        myAccountLoginButtonSubmit.click();
+        closeLoginPage.click();
+        myAccountDropdown.click();
+        myAccountLoginText.click();
+        myAccountLoginEmailAddressBox.sendKeys(eMail);
+        myAccountLoginPasswordBox.sendKeys(password);
+        myAccountLoginButtonSubmit.click();
+        closeLoginPage.click();
+        myAccountDropdown.click();
+        myAccountLoginText.click();
+        myAccountLoginEmailAddressBox.sendKeys(eMail);
+        myAccountLoginPasswordBox.sendKeys(password);
+        myAccountLoginButtonSubmit.click();
+        BrowserUtils.waitForVisibility(loginFiveAttemptsErrorMessage, 5);
     }
 
 
