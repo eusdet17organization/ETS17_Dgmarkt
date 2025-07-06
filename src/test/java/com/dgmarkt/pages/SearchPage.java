@@ -10,8 +10,9 @@ public class SearchPage extends BasePage{
     @FindBy(xpath = "//div[@class='product-thumb']/div/div/following-sibling::div/div/h4")
     public List<WebElement> productName;
 
-    @FindBy(xpath = "//div[@class='box-price']")
+    @FindBy(xpath = "//*[@id='content']/div/div[2]/div[1]/div/div/div[2]/div/div/p/text()")
     public List<WebElement> productPrice;
+
 
 
 }

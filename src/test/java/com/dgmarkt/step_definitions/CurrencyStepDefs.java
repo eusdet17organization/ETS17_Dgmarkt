@@ -1,7 +1,9 @@
 package com.dgmarkt.step_definitions;
 
+import com.dgmarkt.pages.CartIconPage;
 import com.dgmarkt.pages.MainPage;
 import com.dgmarkt.pages.SearchPage;
+import com.dgmarkt.pages.ViewCartPage;
 import com.dgmarkt.utilities.BrowserUtils;
 import com.dgmarkt.utilities.Driver;
 import io.cucumber.java.en.Then;
@@ -14,6 +16,8 @@ public class CurrencyStepDefs {
 
     MainPage mainPage = new MainPage();
     SearchPage searchPage = new SearchPage();
+    ViewCartPage viewCartPage=new ViewCartPage();
+    CartIconPage cartIconPage=new CartIconPage();
 
 
     @When("User navigate to {string} page")
@@ -31,6 +35,14 @@ public class CurrencyStepDefs {
         Driver.get().findElement(By.xpath("//button[text()='" + curreny + "']")).click();
     }
 
+
+    /***
+     * ürünler sayfasindayken para birimi degistirilir (€ Euro,£ Pound Sterling,$ US Dollar)
+     * sayfadaki ürünlerin para birimi degisiyormu kontrolü yapilir.
+     * € ifadesi genellikle en sondadir, £ ve $  bastadir.
+     * Buna göre parametre olarak Scenario outline ile degerler degisiyor mu tek tek hepsi karsilastirilir.
+     * @param currency
+     */
     @Then("User verifies {string} of product")
     public void user_verifies_of_product(String currency) {
 
@@ -44,4 +56,17 @@ public class CurrencyStepDefs {
             }
         }
     }
+
+    @Then("User verifies correct currency of product in cart")
+    public void user_verifies_correct_currency_of_product_in_cart() {
+        if(viewCartPage.productPriceInCart.getText().contains("€")) {
+            char lastChar = viewCartPage.productPriceInCart.getText().charAt(viewCartPage.productPriceInCart.getText().length() - 1);
+            Assert.assertEquals(String.valueOf(lastChar),"€");
+        }else {
+            char firstChar=viewCartPage.productPriceInCart.getText().charAt(0);
+            Assert.assertEquals(String.valueOf(firstChar),"$");
+        }
+
+        }
+
 }

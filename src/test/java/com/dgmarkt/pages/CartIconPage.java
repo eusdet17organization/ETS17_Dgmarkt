@@ -40,6 +40,10 @@ public class CartIconPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(),'View Cart')]")
     private WebElement viewCartButton;
 
+    SearchPage searchPage=new SearchPage();
+
+    public String celloTvPrice;
+
 
     public void clickCartIcon() {
         cartIcon.click();
@@ -51,6 +55,10 @@ public class CartIconPage extends BasePage {
 
 
     public void addTheProductCartWithHover(int productIndex) {
+
+        currencyText.click();
+        Driver.get().findElement(By.xpath("//button[text()='$ US Dollar']")).click();
+
         try {
             // Tüm cart butonlarını listeye koy
             List<WebElement> cartButtons = Driver.get().findElements(By.cssSelector(".button-cart"));
@@ -59,6 +67,7 @@ public class CartIconPage extends BasePage {
                 // scroll ediyoruz urunun uzerine
                 JS.executeScript("arguments[0].scrollIntoView(true);", cartButtons.get(productIndex));
                 Thread.sleep(500); // scrollun tamamlanmasini bekliyoruz
+
                 // Butona clickliyoruz
                 JS.executeScript("arguments[0].click();", cartButtons.get(productIndex));
             } else { // sayfamizdaki secilecek urunun indexine gore

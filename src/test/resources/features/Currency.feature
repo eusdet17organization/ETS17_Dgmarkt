@@ -21,6 +21,12 @@ Feature: Currency Function
       | Networking      | € Euro           |
 
 
+  Scenario: Currency in Cart
+    When User adds a product to cart
+    Then "Successful: You have added ------- to your shopping cart!" message is displayed
+    And  User clicks on cart icon
+    Then User should see added product in cart
+    Then User verifies correct currency of product in cart
 
 
 
