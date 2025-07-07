@@ -41,7 +41,9 @@ public class RegisterStepDefs {
 
     @When("User click the Privacy Policy Text")
     public void user_click_the_privacy_policy_text() {
+        BrowserUtils.scrollToElement(registerPage.privacyPolicyText);
         registerPage.privacyPolicyText.click();
+
     }
 
     @Then("User verifies that opened Privacy Policy pop-up")
@@ -59,7 +61,8 @@ public class RegisterStepDefs {
     @When("User fills password and password confirm field")
     public void user_fills_password_and_password_confirm_field() {
         registerPage.password.sendKeys("123456789");
-        registerPage.password.sendKeys("123456789");
+        registerPage.passwordConfirm.sendKeys("123456789");
+
     }
 
     @Then("User verifies that password and password confirm are masked")

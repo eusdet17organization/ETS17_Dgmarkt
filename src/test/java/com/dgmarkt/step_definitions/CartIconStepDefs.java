@@ -40,8 +40,7 @@ public class CartIconStepDefs {
 
     @When("User adds a product to cart")
     public void user_adds_a_product_to_cart() {
-        mainPage.clickMainButton("Category");
-        mainPage.clickSubButton("Televisions");
+        mainPage.navigateCategoryDropdown("Televisions");
         cartIconPage.addTheProductCartWithHover(5);
     }
 
@@ -56,6 +55,7 @@ public class CartIconStepDefs {
 
     @Then("User should see added product in cart")
     public void user_should_see_added_product_in_cart() throws InterruptedException {
+
         cartIconPage.keepCartDropdownOpen();
         cartIconPage.saveProductDetails();
         Thread.sleep(1000);

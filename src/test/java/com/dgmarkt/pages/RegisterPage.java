@@ -39,7 +39,9 @@ public class RegisterPage extends BasePage{
     public List<WebElement> AllTextBoxPlaceholderName;
 
 
-
+    /***
+     * faker ile sahte kullanici kayit olusturma
+     */
     public void userRegister(){
         Faker faker=new Faker();
         firstName.sendKeys(faker.name().firstName());
@@ -52,6 +54,15 @@ public class RegisterPage extends BasePage{
         continueButton.click();
     }
 
+    /***
+     * parametre ile kullanici kayit olusturma
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param telephone
+     * @param password
+     * @param passwordConfirm
+     */
     public void userRegister(String firstName, String lastName, String email, String telephone, String password, String passwordConfirm){
         this.firstName.sendKeys(firstName);
         this.lastName.sendKeys(lastName);
