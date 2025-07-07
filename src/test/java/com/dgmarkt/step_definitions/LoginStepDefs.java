@@ -109,7 +109,6 @@ public class LoginStepDefs extends BasePage {
     }
 
 
-
     @When("The user clicks on My Account button and clicks on Login button after enters {string} and {string} five attempts")
     public void the_user_clicks_on_my_account_button_and_clicks_on_login_button_after_enters_and_five_attempts(String eMail, String password) {
         loginPage.fiveLoginAttempts(eMail, password);
@@ -119,6 +118,9 @@ public class LoginStepDefs extends BasePage {
     public void the_user_verifies_the_message_after_the_fifth_failed_login() {
         Assert.assertTrue(loginPage.loginFiveAttemptsErrorMessage.isDisplayed());
         Assert.assertEquals("Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.\n" + "×", loginPage.loginFiveAttemptsErrorMessage.getText());
+
+
+    }
 
     /* User Logout Steps */
     @When("The user clicks on My Account button and clicks on Logout button")
@@ -140,7 +142,8 @@ public class LoginStepDefs extends BasePage {
     }
 
     @Then("The user verifies that they are unable to log out by clicking the My Account button from the opened dropdown")
-    public void the_user_verifies_that_they_are_unable_to_log_out_by_clicking_the_my_account_button_from_the_opened_dropdown() {
+    public void the_user_verifies_that_they_are_unable_to_log_out_by_clicking_the_my_account_button_from_the_opened_dropdown
+            () {
         loginPage.myAccountMyAccountButton.click();
         Assert.assertTrue("Account", loginPage.myAccountAccountText.isDisplayed());
         Assert.assertEquals("Account", loginPage.myAccountAccountText.getText());
@@ -148,14 +151,16 @@ public class LoginStepDefs extends BasePage {
     }
 
     @Then("The user verifies that they are unable to log out by clicking the Order History button from the opened dropdown")
-    public void the_user_verifies_that_they_are_unable_to_log_out_by_clicking_the_order_history_button_from_the_opened_dropdown() {
+    public void the_user_verifies_that_they_are_unable_to_log_out_by_clicking_the_order_history_button_from_the_opened_dropdown
+            () {
         loginPage.myAccountOrderHistoryButton.click();
         Assert.assertTrue("Order History", loginPage.myAccountOrderHistoryText.isDisplayed());
         Assert.assertEquals("Order History", loginPage.myAccountOrderHistoryText.getText());
     }
 
     @Then("The user verifies that they are unable to log out by clicking the Transactions button from the opened dropdown")
-    public void the_user_verifies_that_they_are_unable_to_log_out_by_clicking_the_transactions_button_from_the_opened_dropdown() {
+    public void the_user_verifies_that_they_are_unable_to_log_out_by_clicking_the_transactions_button_from_the_opened_dropdown
+            () {
         loginPage.myAccountTransactionsButton.click();
         Assert.assertTrue("Your Transactions", loginPage.myAccountYourTransactionsText.isDisplayed());
         Assert.assertEquals("Your Transactions", loginPage.myAccountYourTransactionsText.getText());
@@ -168,6 +173,4 @@ public class LoginStepDefs extends BasePage {
         Assert.assertEquals("Downloads", loginPage.myAccountDownloadsText.getText());
 
     }
-
-
 }
