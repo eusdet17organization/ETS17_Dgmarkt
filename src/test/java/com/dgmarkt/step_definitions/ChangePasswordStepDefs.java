@@ -3,6 +3,7 @@ package com.dgmarkt.step_definitions;
 import com.dgmarkt.pages.ChangePasswordPage;
 import com.dgmarkt.pages.LoginPage;
 import com.dgmarkt.pages.MainPage;
+import com.dgmarkt.utilities.ConfigurationReader;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -13,7 +14,7 @@ public class ChangePasswordStepDefs {
     ChangePasswordPage changePasswordPage = new ChangePasswordPage();
     @When("The user logs into the account")
     public void the_user_logs_into_the_account() {
-       loginPage.userLogin();
+       loginPage.userLogin(ConfigurationReader.get("email"), ConfigurationReader.get("password"));
        changePasswordPage.loginSuccessfulCloseButton.click();
     }
     @When("The user navigates to the change password page")
