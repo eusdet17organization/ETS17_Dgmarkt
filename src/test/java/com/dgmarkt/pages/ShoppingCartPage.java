@@ -22,26 +22,22 @@ public class ShoppingCartPage extends BasePage {
 
     Faker faker = new Faker();
 
-
-
     @FindBy(xpath = "//strong[contains(., ' Checkout')]")
     public WebElement checkOutInCartIcon;
 
     @FindBy(xpath = "//*[@id=\"button-account\"]")
     public WebElement checkoutOptionsCoBttn;
 
-
     @FindBy(id = "input-payment-firstname")
-    private WebElement firstNameInput;
-
+    public WebElement firstNameInput;
     @FindBy(id = "input-payment-lastname")
-    private WebElement lastNameInput;
+    public WebElement lastNameInput;
 
     @FindBy(id = "input-payment-email")
-    private WebElement emailInput;
+    public WebElement emailInput;
 
     @FindBy(id = "input-payment-telephone")
-    private WebElement telephoneInput;
+    public WebElement telephoneInput;
 
     @FindBy(css = "input[name='company']")
     public WebElement companyInput;
@@ -67,17 +63,11 @@ public class ShoppingCartPage extends BasePage {
     @FindBy(id = "input-payment-confirm")
     public WebElement confirmPasswordInput;
 
-
-
     @FindBy(css = "input[type='checkbox'][name='agree']")
     public WebElement privacyPolicyCheckbox;
 
-
     @FindBy(id = "button-confirm")
     public  WebElement confirmOrderBtn;
-
-    @FindBy(css = "#header > div.breadcrumbs > div > div > h1")
-    WebElement OrderDone;
 
 
     public void ClickCheckOutInCartIcon() {
@@ -87,7 +77,6 @@ public class ShoppingCartPage extends BasePage {
     public void CheckoutOptionsCoBttn() {
         checkoutOptionsCoBttn.click();
     }
-
 
     public void enterFirstName() {
         String firstName = faker.name().firstName();
@@ -124,7 +113,6 @@ public class ShoppingCartPage extends BasePage {
         postcodeInput.sendKeys(postcode);
     }
     public void enterPassword() {
-
         passwordInput.sendKeys("2574dGlogin");
         confirmPasswordInput.sendKeys("2574dGlogin");
     }
@@ -133,7 +121,6 @@ public class ShoppingCartPage extends BasePage {
         String company = "Sdet";
         companyInput.sendKeys(company);
     }
-
 
     // ortak
    public void acceptPrivacyPolicy(){
@@ -156,17 +143,13 @@ public class ShoppingCartPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.elementToBeClickable(deliveryDetailsButton));
             deliveryDetailsButton.click();
-
-
     }
-
     public void clickDeliveryMethodContinueButton() {
             WebElement deliveryMethodButton = driver.findElement(By.id("button-shipping-method"));
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.elementToBeClickable(deliveryMethodButton));
             deliveryMethodButton.click();
     }
-
     public void clickPaymentMethodContinueButton() {
         // Önce Terms & Conditions checkbox'ını işaretlemek icin isaretliyse gecmek icin
             WebElement agreeCheckbox = driver.findElement(By.cssSelector("input[type='checkbox'][name='agree']"));
@@ -179,17 +162,9 @@ public class ShoppingCartPage extends BasePage {
             paymentMethodButton.click();
     }
 
-
-
-
-
-
-
-
     public void confirmOrderBtn(){
         confirmOrderBtn.click();
     }
-
     public void orderDoneHeader(){
 
             WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(10));
@@ -255,14 +230,7 @@ public class ShoppingCartPage extends BasePage {
     @FindBy(id = "button-shipping-method")
     public WebElement deliveryMethodContinueButton;
 
-    @FindBy(xpath = "//input[@type='checkbox']")
-    public WebElement TermsAndConditionsCheckbox;
 
-    @FindBy(xpath = "button-payment-method")
-    public WebElement paymentMethodContinueButton;
-
-    @FindBy(css = "button-confirm")
-    public WebElement confirmOrderButton;
 
 
 }
