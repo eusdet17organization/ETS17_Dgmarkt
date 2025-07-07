@@ -12,6 +12,9 @@ public class ViewCartPage extends BasePage{
     @FindBy(xpath = "//h1[contains(text(),'Shopping Cart')]")
     private WebElement shoppingCartBanner;
 
+    @FindBy(xpath = "//span[@class='cart-product-price']")
+    public WebElement productPriceInCart;
+
     public void clickViewCartButton() {
         viewCartButton.click();
     }

@@ -38,8 +38,7 @@ public class CartIconStepDefs {
 
     @When("User adds a product to cart")
     public void user_adds_a_product_to_cart() {
-        mainPage.clickMainButton("Category");
-        mainPage.clickSubButton("Televisions");
+        mainPage.navigateCategoryDropdown("Televisions");
         cartIconPage.addTheProductCartWithHover(5);
     }
 
@@ -65,7 +64,7 @@ public class CartIconStepDefs {
         BrowserUtils.waitFor(1);
         cartIconPage.clickCartIcon();
 
-        BrowserUtils.waitFor(30);
+        BrowserUtils.waitFor(2);
 
     }
 
