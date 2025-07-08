@@ -80,7 +80,6 @@ public class LoginPage extends BasePage {
     public WebElement myAccountDownloadsText;
 
 
-
     public void userLogin() {
         myAccountDropdown.click();
         myAccountLoginText.click();
@@ -115,31 +114,16 @@ public class LoginPage extends BasePage {
         return BrowserUtils.getText(errorMessage);
     }
 
+
     public void fiveLoginAttempts(String eMail, String password) {
-        myAccountDropdown.click();
-        myAccountLoginText.click();
-        myAccountLoginEmailAddressBox.sendKeys(eMail);
-        myAccountLoginPasswordBox.sendKeys(password);
-        myAccountLoginButtonSubmit.click();
-        closeLoginPage.click();
-        myAccountDropdown.click();
-        myAccountLoginText.click();
-        myAccountLoginEmailAddressBox.sendKeys(eMail);
-        myAccountLoginPasswordBox.sendKeys(password);
-        myAccountLoginButtonSubmit.click();
-        closeLoginPage.click();
-        myAccountDropdown.click();
-        myAccountLoginText.click();
-        myAccountLoginEmailAddressBox.sendKeys(eMail);
-        myAccountLoginPasswordBox.sendKeys(password);
-        myAccountLoginButtonSubmit.click();
-        closeLoginPage.click();
-        myAccountDropdown.click();
-        myAccountLoginText.click();
-        myAccountLoginEmailAddressBox.sendKeys(eMail);
-        myAccountLoginPasswordBox.sendKeys(password);
-        myAccountLoginButtonSubmit.click();
-        closeLoginPage.click();
+        for (int i = 0; i < 4; i++) {
+            myAccountDropdown.click();
+            myAccountLoginText.click();
+            myAccountLoginEmailAddressBox.sendKeys(eMail);
+            myAccountLoginPasswordBox.sendKeys(password);
+            myAccountLoginButtonSubmit.click();
+            closeLoginPage.click();
+        }
         myAccountDropdown.click();
         myAccountLoginText.click();
         myAccountLoginEmailAddressBox.sendKeys(eMail);

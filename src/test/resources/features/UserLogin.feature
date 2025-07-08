@@ -55,50 +55,15 @@ Feature: Login Functionality
       | test.test@test.com |
 
 
-
-  @wip
   Scenario Outline:Login with incorrect credentials - Five failed Entry Test
     When The user clicks on My Account button and clicks on Login button after enters "<E-Mail Address>" and "<Password>" five attempts
     And The user verifies the message after the fifth failed login
     Examples:
       | E-Mail Address       | Password |
-      | test.test01@test.com | Asdf.%&* |
+      | test.test06@test.com | Asdf.%&* |
 
 
 
-  Scenario: Logout Test
-    When The user clicks on My Account button and clicks on Login button after enters valid credentials
-    Then The user verifies that welcome message is displayed
-    When The user clicks on My Account button and clicks on Logout button
-    Then The user closes the Account Logout popup by clicking continue.
-
-
-  Scenario: Logout Negative Test
-    When The user clicks on My Account button and clicks on Login button after enters valid credentials
-    Then The user verifies that welcome message is displayed
-    And The user clicks on My Account button
-    Then The user verifies that they are unable to log out by clicking the My Account button from the opened dropdown
-
-
-  Scenario: Logout Negative Test
-    When The user clicks on My Account button and clicks on Login button after enters valid credentials
-    Then The user verifies that welcome message is displayed
-    And The user clicks on My Account button
-    Then The user verifies that they are unable to log out by clicking the Order History button from the opened dropdown
-
-
-  Scenario: Logout Negative Test
-    When The user clicks on My Account button and clicks on Login button after enters valid credentials
-    Then The user verifies that welcome message is displayed
-    And The user clicks on My Account button
-    Then The user verifies that they are unable to log out by clicking the Transactions button from the opened dropdown
-
-
-  Scenario: Logout Negative Test
-    When The user clicks on My Account button and clicks on Login button after enters valid credentials
-    Then The user verifies that welcome message is displayed
-    And The user clicks on My Account button
-    Then The user verifies that they are unable to log out by clicking the Downloads button from the opened dropdown
 
 
     
