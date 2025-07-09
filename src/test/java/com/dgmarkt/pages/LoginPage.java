@@ -52,7 +52,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"pt-logout-link\"]")
     public WebElement myAccountLogoutButton;
 
-    @FindBy(xpath = "//*[@id=\"content\"]/div[1]/div/div/div/div/div/div[3]/div[4]/div/div/div/div[2]/div/button/span")
+    @FindBy(xpath = "//span[text()='Continue']")
     public WebElement popupContinueButton;
 
     @FindBy(xpath = "//*[@id=\"top-links\"]/ul/li/ul/li[1]/a")
@@ -78,7 +78,6 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/ul/li[3]/a")
     public WebElement myAccountDownloadsText;
-
 
 
     public void userLogin() {
@@ -115,31 +114,16 @@ public class LoginPage extends BasePage {
         return BrowserUtils.getText(errorMessage);
     }
 
+
     public void fiveLoginAttempts(String eMail, String password) {
-        myAccountDropdown.click();
-        myAccountLoginText.click();
-        myAccountLoginEmailAddressBox.sendKeys(eMail);
-        myAccountLoginPasswordBox.sendKeys(password);
-        myAccountLoginButtonSubmit.click();
-        closeLoginPage.click();
-        myAccountDropdown.click();
-        myAccountLoginText.click();
-        myAccountLoginEmailAddressBox.sendKeys(eMail);
-        myAccountLoginPasswordBox.sendKeys(password);
-        myAccountLoginButtonSubmit.click();
-        closeLoginPage.click();
-        myAccountDropdown.click();
-        myAccountLoginText.click();
-        myAccountLoginEmailAddressBox.sendKeys(eMail);
-        myAccountLoginPasswordBox.sendKeys(password);
-        myAccountLoginButtonSubmit.click();
-        closeLoginPage.click();
-        myAccountDropdown.click();
-        myAccountLoginText.click();
-        myAccountLoginEmailAddressBox.sendKeys(eMail);
-        myAccountLoginPasswordBox.sendKeys(password);
-        myAccountLoginButtonSubmit.click();
-        closeLoginPage.click();
+        for (int i = 0; i < 4; i++) {
+            myAccountDropdown.click();
+            myAccountLoginText.click();
+            myAccountLoginEmailAddressBox.sendKeys(eMail);
+            myAccountLoginPasswordBox.sendKeys(password);
+            myAccountLoginButtonSubmit.click();
+            closeLoginPage.click();
+        }
         myAccountDropdown.click();
         myAccountLoginText.click();
         myAccountLoginEmailAddressBox.sendKeys(eMail);
