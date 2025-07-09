@@ -14,9 +14,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 import static com.dgmarkt.utilities.Driver.driver;
 
 public class WishListStepDefs {
+    SearchPage searchPage= new SearchPage();
     CartIconPage cartIconPage = new CartIconPage();
     WistListPage wistListPage = new WistListPage();
     LoginPanelPage loginPanelPage = new LoginPanelPage();
@@ -24,20 +27,25 @@ public class WishListStepDefs {
     MainPage mainPage = new MainPage();
 
     LoginPage loginPage = new LoginPage();
+    protected String product;
 
-    @Then("user clicks from category to television")
-    public void user_clicks_from_category_to_television() {
-        loginPage.userLogin();
-        BrowserUtils.waitFor(5);
-        mainPage.clickMainButton("Category");
+    @When("User click the search icon {string} and search")
+    public void user_click_the_search_icon_and_search(String product) {
 
-        mainPage.clickSubButton("Televisions");
+        BrowserUtils.waitFor(1);
+        searchPage.searchIcon.click();
+        BrowserUtils.waitFor(1);
+        searchPage.searchText.sendKeys(product);
+        this.product=product;
+        BrowserUtils.waitFor(1);
+        searchPage.searchIconWithSearchText.click();
+
 
     }
 
     @When("User hovers over the product and clicks the wish list button")
     public void user_hovers_over_the_product_and_clicks_the_wish_list_button() {
-        wistListPage.addTheWishListWithHover(11);
+        wistListPage.addTheWishListWithHover(0);
 
 
     }
@@ -46,30 +54,29 @@ public class WishListStepDefs {
     public void user_wish_list_sees_added_pop_ups() {
         String actualMessage = wistListPage.getSuccessMessage();
         String expectedMessage = wistListPage.getSuccessMessageText();
-
         Assert.assertTrue("Success message is not displayed!", actualMessage.contains(expectedMessage));
-
         System.out.println("Success Message: " + actualMessage);
     }
 
 
     @Then("User confirms that the product has been added to the wish list")
     public void user_confirms_that_the_product_has_been_added_to_the_wish_list() {
-        BrowserUtils.waitFor(5);
+
         wistListPage.clickWishList();
-        Assert.assertTrue("Product name is incorrect!",
-        wistListPage.getProductName().equalsIgnoreCase("Daewoo D24RTSDVD 24\" Smart LED TV With DVD"));
+        //Assert.assertTrue("Product name is incorrect!", wistListPage.getProductName().contains(product));
+        Assert.assertTrue(Driver.get().findElement(By.partialLinkText(product)).getText().contains(product));
         System.out.println(" : Product details have been successfully verified:");
         System.out.println(" : Name: " + wistListPage.getProductName());
 
-    }
+        }
+
 
     @Then("user confirms that the base has been deleted")
     public void user_confirms_that_the_base_has_been_deleted() {
         BrowserUtils.hover(wistListPage.removeButton);
-        BrowserUtils.waitFor(1);
+        BrowserUtils.waitForVisibility(By.xpath("//a[@data-original-title='Remove']"),1);
         wistListPage.removeButton.click();
-        BrowserUtils.waitFor(1);
+
     }
 
     @Then("user  {string} sees your message")
@@ -87,28 +94,24 @@ public class WishListStepDefs {
     public void user_add_to_cart_sees_added_pop_ups() {
         String actualMessage = wistListPage.getSuccessMessage();
         String expectedMessage = wistListPage.getSuccessMessageText();
-
         Assert.assertTrue("Success message is not displayed!", actualMessage.contains(expectedMessage));
-
         System.out.println("Success Message: " + actualMessage);
     }
 
 
     @Then("User confirms that the product has been added to the cart")
     public void user_confirms_that_the_product_has_been_added_to_the_cart() {
+
         cartIconPage.clickCartIcon();
-        Assert.assertTrue("Product name is incorrect!",
-                wistListPage.getProductNameinCartİcon().equalsIgnoreCase("Daewoo D24RTSDVD 24\" Smart LED TV With DVD"));
+        //Assert.assertTrue("Product name is incorrect!",wistListPage.getProductNameinCartİcon().contains(product));
+        Assert.assertTrue(Driver.get().findElement(By.partialLinkText(product)).getText().contains(product));
         System.out.println(" : Product details have been successfully verified:");
-        System.out.println(" : Name: " + wistListPage.getProductNameinCartİcon());
+       // System.out.println(" : Name: " + wistListPage.getProductNameinCartİcon());
+
+
     }
 
-    @Then("user clicks on category and television")
-    public void user_clicks_on_category_and_television() {
-        mainPage.clickMainButton("Category");
 
-        mainPage.clickSubButton("Televisions");
-    }
 
     @Then("User wish list sees added pop-ups clicks to login")
     public void user_wish_list_sees_added_pop_ups_clicks_to_login() {

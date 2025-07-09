@@ -5,6 +5,7 @@ import com.dgmarkt.utilities.ConfigurationReader;
 import com.dgmarkt.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -45,7 +46,7 @@ public class WistListPage extends BasePage{
     public WebElement getProduckNameWl;
 
     @FindBy(css = "#cart > ul > li:nth-child(1) > table > tbody > tr > td.text-left.cart-info > a")
-    private WebElement productNameInCart;
+    public WebElement productNameInCart;
 
     @FindBy(xpath = "//*[@id=\"input-email\"]")
     public WebElement wishListLoginEmailAddressBox;
@@ -135,18 +136,6 @@ public class WistListPage extends BasePage{
             return "";
         }
     }
-    public boolean verifySuccessMessage() {
-        try {
-            WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(10));
-            WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//div[contains(text(),'Success: You have added')]")));
-
-            return successMessage.isDisplayed();
-        } catch (Exception e) {
-            System.out.println("Success message verification failed: " + e.getMessage());
-            return false;
-        }
-    }
 
 
     // 2. Success mesajını doğrulama metodu
@@ -173,7 +162,31 @@ public class WistListPage extends BasePage{
         } catch (Exception e) {
             System.out.println("Login linki bulunamadı veya tıklanamadı: " + e.getMessage());
         }
+
     }
+    protected String selectedProductName;
+
+
+    public void saveProductDetails() {
+        BrowserUtils.waitForVisibility(productNameInCart, 10);
+        selectedProductName = productNameInCart.getText();
+
+    }
+
+    public void verifyCartDetails() {
+        BrowserUtils.waitForVisibility(productNameInCart, 10);
+
+        String actualName = getProductName().toUpperCase();
+
+
+        System.out.println("Verification Details:");
+        System.out.println("Name - Expected: " + selectedProductName + " | Actual: " + actualName);
+
+
+        Assert.assertEquals("Product name is incorrect!", selectedProductName, actualName);
+
+    }
+
 
 }
 
