@@ -1,15 +1,18 @@
 package com.dgmarkt.pages;
 
+import com.dgmarkt.utilities.BrowserUtils;
 import com.dgmarkt.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class CheckoutPage extends BasePage {
-
-
 
 
     @FindBy(id = "cart")
@@ -21,16 +24,19 @@ public class CheckoutPage extends BasePage {
     @FindBy(xpath = "//div[@class='pull-right']")
     public WebElement checkOutButton;
 
-    @FindBy (id = "button-cart")
-     public WebElement addToCartButton;
+    @FindBy(id = "button-cart")
+    public WebElement addToCartButton;
 
-
+    @FindBy(xpath = "//table//tbody//tr/td[4]")
+    public WebElement confirmOrderTableUnitPrice;
 
 
 
     ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
     MainPage mainPage = new MainPage();
     SearchPage searchPage = new SearchPage();
+    public static String unitPrice;
+
 
 
 
@@ -42,10 +48,8 @@ public class CheckoutPage extends BasePage {
     public WebElement productAvailability;
 
 
-
     // Method:
     public void addProductToCartWithStock() {
-        mainPage.clickMainButton("Category");
         mainPage.clickSubButton("Televisions");
 
         for (int i = 0; i < productName.size(); i++) {
@@ -56,9 +60,8 @@ public class CheckoutPage extends BasePage {
             }
             Driver.get().navigate().back();
         }
-        //Driver.get().navigate().back();
-    }
 
+    }
 
 
     /* public void addProductToCart() {
@@ -78,17 +81,61 @@ public class CheckoutPage extends BasePage {
     }
 */
     public void completeOrder() {
-        cartIcon.click();
+        if (!viewCartIcon.isDisplayed()) {
+            cartIcon.click();
+        }
         viewCartIcon.click();
         checkOutButton.click();
         shoppingCartPage.billingDetailsContinueButton.click();
+        BrowserUtils.waitFor(2);
         shoppingCartPage.deliverDetailsContinueButton.click();
+        BrowserUtils.waitFor(2);
         shoppingCartPage.deliveryMethodContinueButton.click();
+        BrowserUtils.waitFor(2);
+
         //shoppingCartPage.privacyPolicyCheckbox.click();
         shoppingCartPage.clickPaymentMethodContinueButton();
+        BrowserUtils.waitFor(2);
+
+        unitPrice = confirmOrderTableUnitPrice.getText();
+
+
         shoppingCartPage.confirmOrderBtn();
+
     }
 
+
+    /***
+     * ürün checkout sayfasindadir ve enson adres ,ödeme islemleri gibi gerekli bilgilerle
+     * siparis olusturulur.
+     */
+    public void orderComplete(){
+
+
+        BrowserUtils.clickWithJS(shoppingCartPage.billingDetailsContinueButton);
+        BrowserUtils.waitFor(1);
+
+        BrowserUtils.clickWithJS(shoppingCartPage.deliverDetailsContinueButton);
+        BrowserUtils.waitFor(1);
+
+        BrowserUtils.clickWithJS(shoppingCartPage.deliveryMethodContinueButton);
+        BrowserUtils.waitFor(1);
+
+        BrowserUtils.clickWithJS(shoppingCartPage.TermsAndConditionsCheckbox);
+        BrowserUtils.waitFor(1);
+        Driver.get().findElement(By.id("button-payment-method")).click();
+
+
+        wait=new WebDriverWait(Driver.get(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table//tbody//tr/td[4]")));
+
+        unitPrice=confirmOrderTableUnitPrice.getText();
+
+
+        shoppingCartPage.confirmOrderBtn.click();
+
+
+    }
 
 }
 

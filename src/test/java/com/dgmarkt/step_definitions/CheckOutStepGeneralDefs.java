@@ -18,7 +18,7 @@ public class CheckOutStepGeneralDefs {
 
     @When("User adds a product to cart with {string} button")
     public void user_adds_a_product_to_cart_with_button(String string) {
-        BrowserUtils.waitFor(5);
+        BrowserUtils.waitFor(2);
 
         checkoutPage.addProductToCartWithStock();
 

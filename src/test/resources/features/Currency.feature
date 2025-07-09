@@ -1,3 +1,4 @@
+
 Feature: Currency Function
 
   Background: First Login
@@ -21,12 +22,76 @@ Feature: Currency Function
       | Networking      | € Euro           |
 
 
-  Scenario: Currency in Cart
-    When User adds a product to cart
-    Then "Successful: You have added ------- to your shopping cart!" message is displayed
-    And  User clicks on cart icon
-    Then User should see added product in cart
-    Then User verifies correct currency of product in cart
+  Scenario Outline: Change in the amount of money according to the exchange rate
+    When User navigate to "<product>" page
+    And User click the Currency text
+    And User click the any "<Currency>"
+    Then The user verifies that the product price has changed numerically.
+    Examples:
+      | product         | Currency         |
+      | TELEVISIONS     | € Euro           |
+      | Health & Beauty | £ Pound Sterling |
+      | TV Accessories  | $ US Dollar      |
+      | Networking      | € Euro           |
+
+
+  Scenario Outline: Currency dropdown name change
+    When User click the Currency text
+    And User click the any "<Currency>"
+    Then User verifies that the currency has changed in the menu
+    Examples:
+      | Currency         |
+      | £ Pound Sterling |
+      | $ US Dollar      |
+      | € Euro           |
+
+
+
+  Scenario Outline: Currency when the shopping is completed
+    When User navigate to "<product>" page
+    And User click the Currency text
+    And User click the any "<Currency>"
+    Then User adds product to cart
+    When User click viewCart icon
+    When User click checkout button
+    When User complete the order in checkout page
+    Then User verifies that the product in the checkout page with correct "<Currency>"
+    Examples:
+      | product         | Currency         |
+      | TELEVISIONS     | € Euro           |
+      | Health & Beauty | £ Pound Sterling |
+      | TV Accessories  | $ US Dollar      |
+      | Networking      | € Euro           |
+
+
+  Scenario Outline: Currency Control in Cart
+    When User navigate to "<product>" page
+    And User click the Currency text
+    And User click the any "<Currency>"
+    Then User adds product to cart
+    When User click viewCart icon
+    Then User verifies that the product in the cart with correct "<Currency>"
+    Examples:
+      | product         | Currency         |
+      | TELEVISIONS     | € Euro           |
+      | Health & Beauty | £ Pound Sterling |
+      | TV Accessories  | $ US Dollar      |
+      | Networking      | € Euro           |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
