@@ -25,9 +25,16 @@ public class ChangePasswordPage extends BasePage{
     @FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
     public WebElement changePasswordSuccessMessage;
 
+    @FindBy(xpath = "//div[@class='text-danger']")
+    public WebElement changePasswordErrorMessage;
+
     public void setChangePassword(){
-        passwordBox.sendKeys(ConfigurationReader.get("changePassword"));
-        confirmPasswordBox.sendKeys(ConfigurationReader.get("changePassword"));
+        passwordBox.sendKeys(ConfigurationReader.get("modifyNewPassword"));
+        confirmPasswordBox.sendKeys(ConfigurationReader.get("modifyNewPassword"));
+        changePasswordContinueButton.click();
+    }
+    public void changePasswordWithOnlyNewPassword(){
+        passwordBox.sendKeys(ConfigurationReader.get("modifyNewPassword"));
         changePasswordContinueButton.click();
     }
 
