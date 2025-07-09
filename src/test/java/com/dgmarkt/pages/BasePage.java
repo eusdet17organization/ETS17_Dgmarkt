@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BasePage {
     public BasePage(){
@@ -13,6 +14,7 @@ public abstract class BasePage {
     }
 
     protected Select select;
+    protected WebDriverWait wait;
 
     @FindBy(xpath = "//*[@id=\"top-links\"]/ul/li/a/span")
     public WebElement myAccountDropdown;
