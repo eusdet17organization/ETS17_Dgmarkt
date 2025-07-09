@@ -6,6 +6,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import org.openqa.selenium.support.ui.ExpectedCondition;
+
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -20,6 +24,7 @@ public class CheckoutPage extends BasePage {
     MainPage mainPage = new MainPage();
 
 
+
     @FindBy(id = "cart")
     public WebElement cartIcon;
 
@@ -29,9 +34,28 @@ public class CheckoutPage extends BasePage {
     @FindBy(xpath = "//div[@class='pull-right']")
     public WebElement checkOutButton;
 
+
+    @FindBy(id = "button-cart")
+    public WebElement addToCartButton;
+
+    @FindBy(xpath = "//table//tbody//tr/td[4]")
+    public WebElement confirmOrderTableUnitPrice;
+
+
+
+    ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
+    MainPage mainPage = new MainPage();
+    SearchPage searchPage = new SearchPage();
+    public static String unitPrice;
+
+
+
+
+
     @FindBy (id = "button-cart")
      public WebElement addToCartButton;
     // search sayfasindaki productNameye ulasamadim buraya tasidim.
+
     @FindBy(xpath = "//div[@class='product-thumb']/div/div/following-sibling::div/div/h4")
     public List<WebElement> productName;
 
@@ -52,9 +76,12 @@ public class CheckoutPage extends BasePage {
     WebElement checkOutBand;
 
 
+    // Method:
+
+
     // Method: Dinamik stokta varmi yok mu olarak kontrol ederek urunu sepete ekletiyoruz
+
     public void addProductToCartWithStock() {
-        mainPage.clickMainButton("Category");
         mainPage.clickSubButton("Televisions");
 
         for (int i = 0; i < productName.size(); i++) {
@@ -65,25 +92,70 @@ public class CheckoutPage extends BasePage {
             }
             Driver.get().navigate().back();
         }
-        //Driver.get().navigate().back();
+
     }
 
-
     public void completeOrder() {
-        cartIcon.click();
+        if (!viewCartIcon.isDisplayed()) {
+            cartIcon.click();
+        }
         viewCartIcon.click();
         checkOutButton.click();
         shoppingCartPage.billingDetailsContinueButton.click();
+        BrowserUtils.waitFor(2);
         shoppingCartPage.deliverDetailsContinueButton.click();
+        BrowserUtils.waitFor(2);
         shoppingCartPage.deliveryMethodContinueButton.click();
+        BrowserUtils.waitFor(2);
+
         //shoppingCartPage.privacyPolicyCheckbox.click();
         shoppingCartPage.clickPaymentMethodContinueButton();
+        BrowserUtils.waitFor(2);
+
+        unitPrice = confirmOrderTableUnitPrice.getText();
+
+
         shoppingCartPage.confirmOrderBtn();
+
     }
 
 
+
+    /***
+     * ürün checkout sayfasindadir ve enson adres ,ödeme islemleri gibi gerekli bilgilerle
+     * siparis olusturulur.
+     */
+    public void orderComplete(){
+
+
+        BrowserUtils.clickWithJS(shoppingCartPage.billingDetailsContinueButton);
+        BrowserUtils.waitFor(1);
+
+        BrowserUtils.clickWithJS(shoppingCartPage.deliverDetailsContinueButton);
+        BrowserUtils.waitFor(1);
+
+        BrowserUtils.clickWithJS(shoppingCartPage.deliveryMethodContinueButton);
+        BrowserUtils.waitFor(1);
+
+        BrowserUtils.clickWithJS(shoppingCartPage.TermsAndConditionsCheckbox);
+        BrowserUtils.waitFor(1);
+        Driver.get().findElement(By.id("button-payment-method")).click();
+
+
+        wait=new WebDriverWait(Driver.get(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table//tbody//tr/td[4]")));
+
+        unitPrice=confirmOrderTableUnitPrice.getText();
+
+
+        shoppingCartPage.confirmOrderBtn.click();
+
+
+    }
+
 ///------------------Seneryo2 User adds a product to cart with "Search" button -------------------------///////
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
 
 
 
