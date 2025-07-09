@@ -43,8 +43,6 @@ public class CheckoutPage extends BasePage {
 
 
 
-    ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
-    MainPage mainPage = new MainPage();
     SearchPage searchPage = new SearchPage();
     public static String unitPrice;
 
@@ -52,9 +50,6 @@ public class CheckoutPage extends BasePage {
 
 
 
-    @FindBy (id = "button-cart")
-     public WebElement addToCartButton;
-    // search sayfasindaki productNameye ulasamadim buraya tasidim.
 
     @FindBy(xpath = "//div[@class='product-thumb']/div/div/following-sibling::div/div/h4")
     public List<WebElement> productName;

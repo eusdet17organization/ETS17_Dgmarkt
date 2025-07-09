@@ -230,7 +230,8 @@ public class ShoppingCartPage extends BasePage {
     @FindBy(id = "button-shipping-method")
     public WebElement deliveryMethodContinueButton;
 
-
+    @FindBy(xpath = "//input[@type='checkbox']")
+    public WebElement TermsAndConditionsCheckbox;
 
 
 }
