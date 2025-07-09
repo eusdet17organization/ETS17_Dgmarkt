@@ -46,7 +46,7 @@ public class WistListPage extends BasePage{
     public WebElement getProduckNameWl;
 
     @FindBy(css = "#cart > ul > li:nth-child(1) > table > tbody > tr > td.text-left.cart-info > a")
-    private WebElement productNameInCart;
+    public WebElement productNameInCart;
 
     @FindBy(xpath = "//*[@id=\"input-email\"]")
     public WebElement wishListLoginEmailAddressBox;
@@ -186,14 +186,7 @@ public class WistListPage extends BasePage{
         Assert.assertEquals("Product name is incorrect!", selectedProductName, actualName);
 
     }
-    public String getPrice() {
-        BrowserUtils.waitForVisibility(productNameInCart, 5);
-        return productNameInCart.getText().trim();
-    }
-    public void clickRemoveButton() {
-        BrowserUtils.waitForClickablility(removeButton, 5);
-        removeButton.click();
-    }
+
 
 }
 

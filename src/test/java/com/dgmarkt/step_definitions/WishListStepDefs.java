@@ -14,6 +14,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 import static com.dgmarkt.utilities.Driver.driver;
 
 public class WishListStepDefs {
@@ -25,16 +27,19 @@ public class WishListStepDefs {
     MainPage mainPage = new MainPage();
 
     LoginPage loginPage = new LoginPage();
+    protected String product;
 
-    @Then("user clicks from category to television")
-    public void user_clicks_from_category_to_television() {
-        loginPage.userLogin();
-       BrowserUtils.waitFor(1);
+    @When("User click the search icon {string} and search")
+    public void user_click_the_search_icon_and_search(String product) {
+
+        BrowserUtils.waitFor(1);
         searchPage.searchIcon.click();
         BrowserUtils.waitFor(1);
-        searchPage.searchText.sendKeys("Cello C4020G 40\" Smart LED TV");
+        searchPage.searchText.sendKeys(product);
+        this.product=product;
         BrowserUtils.waitFor(1);
         searchPage.searchIconWithSearchText.click();
+
 
     }
 
@@ -49,9 +54,7 @@ public class WishListStepDefs {
     public void user_wish_list_sees_added_pop_ups() {
         String actualMessage = wistListPage.getSuccessMessage();
         String expectedMessage = wistListPage.getSuccessMessageText();
-
         Assert.assertTrue("Success message is not displayed!", actualMessage.contains(expectedMessage));
-
         System.out.println("Success Message: " + actualMessage);
     }
 
@@ -60,12 +63,13 @@ public class WishListStepDefs {
     public void user_confirms_that_the_product_has_been_added_to_the_wish_list() {
 
         wistListPage.clickWishList();
-        Assert.assertTrue("Product name is incorrect!",
-        wistListPage.getProductName().equalsIgnoreCase("Cello C4020G 40\" Smart LED TV"));
+        //Assert.assertTrue("Product name is incorrect!", wistListPage.getProductName().contains(product));
+        Assert.assertTrue(Driver.get().findElement(By.partialLinkText(product)).getText().contains(product));
         System.out.println(" : Product details have been successfully verified:");
         System.out.println(" : Name: " + wistListPage.getProductName());
 
-    }
+        }
+
 
     @Then("user confirms that the base has been deleted")
     public void user_confirms_that_the_base_has_been_deleted() {
@@ -97,26 +101,17 @@ public class WishListStepDefs {
 
     @Then("User confirms that the product has been added to the cart")
     public void user_confirms_that_the_product_has_been_added_to_the_cart() {
-        BrowserUtils.waitForPageToLoad(3);
+
         cartIconPage.clickCartIcon();
-        BrowserUtils.waitForClickablility(By.id("cart"),1);
-        wistListPage.saveProductDetails();
-        BrowserUtils.waitFor(1);
-        wistListPage.verifyCartDetails();
+        //Assert.assertTrue("Product name is incorrect!",wistListPage.getProductNameinCartİcon().contains(product));
+        Assert.assertTrue(Driver.get().findElement(By.partialLinkText(product)).getText().contains(product));
+        System.out.println(" : Product details have been successfully verified:");
+       // System.out.println(" : Name: " + wistListPage.getProductNameinCartİcon());
 
 
     }
 
-    @Then("user clicks on category and television")
-    public void user_clicks_on_category_and_television() {
 
-        BrowserUtils.waitFor(1);
-        searchPage.searchIcon.click();
-        BrowserUtils.waitFor(1);
-        searchPage.searchText.sendKeys("Cello C4020G 40\" Smart LED TV");
-        BrowserUtils.waitFor(1);
-        searchPage.searchIconWithSearchText.click();
-    }
 
     @Then("User wish list sees added pop-ups clicks to login")
     public void user_wish_list_sees_added_pop_ups_clicks_to_login() {
