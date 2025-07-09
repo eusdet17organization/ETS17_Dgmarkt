@@ -2,17 +2,19 @@ package com.dgmarkt.step_definitions;
 
 import com.dgmarkt.pages.LoginPage;
 import com.dgmarkt.pages.ShoppingCartPage;
+
+import com.dgmarkt.utilities.BrowserUtils;
 import com.dgmarkt.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+
 public class CheckOutStepDefs {
 
-   LoginPage loginPage = new LoginPage();
    ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
 
 
@@ -23,6 +25,7 @@ public class CheckOutStepDefs {
     @Then("The user fills in the {string} page and clicks {string} button.")
     public void the_user_fills_in_the_page_and_clicks_button(String string, String string2) {
      shoppingCartPage.CheckoutOptionsCoBttn();
+     BrowserUtils.waitForClickablility(By.id("input-payment-firstname"),3);
      shoppingCartPage.fillAllBillingDetails();
      //shoppingCartPage.checkSameAddressBox();
      shoppingCartPage.acceptPrivacyPolicy();
@@ -31,7 +34,6 @@ public class CheckOutStepDefs {
     }
     @Then("In the {string} section, the user selects {string} and clicks the {string} button")
     public void in_the_section_the_user_selects_and_clicks_the_button(String string, String string2, String string3) {
-
      shoppingCartPage.clickDeliveryDetailsContinueButton();
     }
     @Then("Select {string} on the {string} page and click on the {string} button.")
@@ -49,9 +51,6 @@ public class CheckOutStepDefs {
     }
     @Then("The user checks the product in the {string} section and clicks the {string} button")
     public void the_user_checks_the_product_in_the_section_and_clicks_the_button(String string, String string2) {
-
-
-
      shoppingCartPage.confirmOrderBtn();
 
     }

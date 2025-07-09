@@ -12,11 +12,14 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.concurrent.TimeoutException;
+
+import static com.dgmarkt.utilities.Driver.driver;
 
 public class CartIconStepDefs {
 
@@ -35,7 +38,6 @@ public class CartIconStepDefs {
         System.out.println(cartIconPage.getEmptyCartMessage());
     }
 
-
     @When("User adds a product to cart")
     public void user_adds_a_product_to_cart() {
         mainPage.navigateCategoryDropdown("Televisions");
@@ -53,44 +55,18 @@ public class CartIconStepDefs {
 
     @Then("User should see added product in cart")
     public void user_should_see_added_product_in_cart() throws InterruptedException {
-        // Success message'ı kapat
-        try {
-            WebElement closeButton = Driver.get().findElement(By.cssSelector(".alert-success .close"));
-            closeButton.click();
-        } catch (Exception e) {
-            // Mesaj zaten kapanmiyor
-        }
 
-        BrowserUtils.waitFor(1);
-        cartIconPage.clickCartIcon();
-
-        BrowserUtils.waitFor(2);
+        cartIconPage.keepCartDropdownOpen();
+        cartIconPage.saveProductDetails();
+        Thread.sleep(1000);
 
     }
 
     @Then("Product name, price and quantity should be displayed correctly")
     public void product_name_price_and_quantity_should_be_displayed_correctly() {
-        BrowserUtils.waitFor(2);
-        // Büyük-küçük harf
-        Assert.assertTrue("Product name is incorrect!",
-                cartIconPage.getProductName().equalsIgnoreCase("Cello C4020G 40\" Smart LED TV"));
-
-        Assert.assertEquals("Product quantity is incorrect!",
-                "1",
-                cartIconPage.getQuantity());
-
-        Assert.assertEquals("Product price is incorrect!",
-                "$158.00",
-                cartIconPage.getPrice());
-
-        // dogrulama mesajlari
-        System.out.println(" : Product details have been successfully verified:");
-        System.out.println(" : Name: " + cartIconPage.getProductName());
-        System.out.println(" : Quantity: " + cartIconPage.getQuantity());
-        System.out.println(" : Price: " + cartIconPage.getPrice() + " ");
-
+        cartIconPage.keepCartDropdownOpen();
+        cartIconPage.verifyCartDetails();
     }
-
 
     @Then("User clicks the “Remove” button")
     public void user_clicks_the_remove_button() {

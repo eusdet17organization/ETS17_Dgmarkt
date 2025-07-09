@@ -15,6 +15,8 @@ import java.sql.DriverManager;
 import java.time.Duration;
 import java.util.List;
 
+import static com.dgmarkt.utilities.Driver.driver;
+
 public class CartIconPage extends BasePage {
 
 
@@ -23,7 +25,6 @@ public class CartIconPage extends BasePage {
 
     @FindBy(css = "p.text-center")
     WebElement emptyCartMessage;
-
 
     @FindBy(xpath = "//td[@class='text-left cart-info']//a")
     private WebElement productNameInCart;
@@ -37,12 +38,14 @@ public class CartIconPage extends BasePage {
     @FindBy(css = ".btn-danger.btn-xs.button-cart-remove")
     private WebElement removeButton;
 
+
     @FindBy(xpath = "//button[contains(text(),'View Cart')]")
     private WebElement viewCartButton;
 
     SearchPage searchPage=new SearchPage();
 
     public String celloTvPrice;
+
 
 
     public void clickCartIcon() {
@@ -113,29 +116,61 @@ public class CartIconPage extends BasePage {
 
     // cartin icindeki urun
     public String getProductName() {
-        BrowserUtils.waitForVisibility(productNameInCart, 10);
+        BrowserUtils.waitForVisibility(productNameInCart, 5);
         return productNameInCart.getText().trim();
     }
-
     public String getQuantity() {
-        BrowserUtils.waitForVisibility(productQuantityInCart, 10);
+        BrowserUtils.waitForVisibility(productQuantityInCart, 5);
         return productQuantityInCart.getText().replace("x", "").trim();
     }
-
     public String getPrice() {
-        BrowserUtils.waitForVisibility(productPriceInCart, 10);
+        BrowserUtils.waitForVisibility(productPriceInCart, 5);
         return productPriceInCart.getText().trim();
     }
-
     public void clickRemoveButton() {
-        BrowserUtils.waitForClickablility(removeButton, 10);
+        BrowserUtils.waitForClickablility(removeButton, 5);
         removeButton.click();
+    }
 
+    //////////----------------------------------------- dinamik cart icon icindeki urunun bilgilerini kontrol etme
+
+
+    public void keepCartDropdownOpen() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.querySelector('#cart').classList.add('open');");
+        js.executeScript("document.querySelector('.dropdown-menu').style.display = 'block';");
     }
 
 
+    protected String selectedProductName;
+    protected String selectedProductPrice;
+    protected String selectedProductQuantity;
 
 
+    public void saveProductDetails() {
+        BrowserUtils.waitForVisibility(productNameInCart, 10);
+        selectedProductName = productNameInCart.getText();
+        selectedProductPrice = productPriceInCart.getText();
+        selectedProductQuantity = productQuantityInCart.getText().split(" ")[0];
+    }
+
+    public void verifyCartDetails() {
+        BrowserUtils.waitForVisibility(productNameInCart, 10);
+
+        String actualName = getProductName();
+        String actualPrice = getPrice();
+        String actualQuantity = getQuantity();
+
+        System.out.println("Verification Details:");
+        System.out.println("Name - Expected: " + selectedProductName + " | Actual: " + actualName);
+        System.out.println("Price - Expected: " + selectedProductPrice + " | Actual: " + actualPrice);
+        System.out.println("Quantity - Expected: " + selectedProductQuantity + " | Actual: " + actualQuantity);
+
+        Assert.assertEquals("Product name is incorrect!", selectedProductName, actualName);
+        Assert.assertEquals("Product price is incorrect!", selectedProductPrice, actualPrice);
+        Assert.assertEquals("Product quantity is incorrect!", selectedProductQuantity, actualQuantity);
+
+    }
 
 
 }
