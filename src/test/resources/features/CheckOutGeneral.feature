@@ -16,10 +16,17 @@ Feature: Cart Button Management
 
 
 
-  Scenario: User adds a product to cart with "Search" button
-    Then User click the search icon
-    Then User searches for the product in the search bar
-    And  User click the product and "Add To Cart" button
+  Scenario Outline: User adds a product to cart with "Search" button
+    Given User click the search icon
+    When User searches for the "<product>" in the search bar
+    And User click the product and "Add To Cart" button
+    Examples:
+      | product                                          |
+      | Cello C4020G 40 Smart LED TV                     |
+      | Daewoo D24RTSDVD 24 Smart LED TV With DVD        |
+
+
+
 
 
 

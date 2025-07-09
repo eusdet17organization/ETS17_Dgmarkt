@@ -59,9 +59,6 @@ public class CartIconPage extends BasePage {
 
     public void addTheProductCartWithHover(int productIndex) {
 
-        currencyText.click();
-        Driver.get().findElement(By.xpath("//button[text()='$ US Dollar']")).click();
-
         try {
             // Tüm cart butonlarını listeye koy
             List<WebElement> cartButtons = Driver.get().findElements(By.cssSelector(".button-cart"));

@@ -1,26 +1,24 @@
 package com.dgmarkt.pages;
-
 import com.dgmarkt.utilities.BrowserUtils;
 import com.dgmarkt.utilities.Driver;
 import com.github.javafaker.Faker;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.List;
-import java.util.Random;
+
 
 import static com.dgmarkt.utilities.Driver.driver;
 
 public class ShoppingCartPage extends BasePage {
 
     Faker faker = new Faker();
+    WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(10));
 
     @FindBy(xpath = "//strong[contains(., ' Checkout')]")
     public WebElement checkOutInCartIcon;
@@ -71,7 +69,7 @@ public class ShoppingCartPage extends BasePage {
 
 
     public void ClickCheckOutInCartIcon() {
-        checkOutInCartIcon.click();
+        BrowserUtils.clickWithJS(checkOutInCartIcon);
     }
 
     public void CheckoutOptionsCoBttn() {
@@ -124,15 +122,13 @@ public class ShoppingCartPage extends BasePage {
 
     // ortak
    public void acceptPrivacyPolicy(){
-            WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(10));
-            wait.until(ExpectedConditions.elementToBeClickable(privacyPolicyCheckbox));
-            privacyPolicyCheckbox.click();}
+        wait.until(ExpectedConditions.elementToBeClickable(privacyPolicyCheckbox));
+        privacyPolicyCheckbox.click();}
 
     // her continue tusu icin ayri bir method yaptik
     public void clickBillingContinueButton() {
             WebElement billingContinueButton = driver.findElement(By.id("button-register"));
             // Butonun tıklanabilir olmasını bekletiyoruz
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.elementToBeClickable(billingContinueButton));
             // Butona tıkla
             billingContinueButton.click();
@@ -140,13 +136,11 @@ public class ShoppingCartPage extends BasePage {
 
     public void clickDeliveryDetailsContinueButton() {
         WebElement deliveryDetailsButton = driver.findElement(By.id("button-shipping-address"));
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.elementToBeClickable(deliveryDetailsButton));
             deliveryDetailsButton.click();
     }
     public void clickDeliveryMethodContinueButton() {
             WebElement deliveryMethodButton = driver.findElement(By.id("button-shipping-method"));
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.elementToBeClickable(deliveryMethodButton));
             deliveryMethodButton.click();
     }
@@ -157,7 +151,6 @@ public class ShoppingCartPage extends BasePage {
                 agreeCheckbox.click();
             }
             WebElement paymentMethodButton = driver.findElement(By.id("button-payment-method"));
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.elementToBeClickable(paymentMethodButton));
             paymentMethodButton.click();
     }
@@ -166,8 +159,6 @@ public class ShoppingCartPage extends BasePage {
         confirmOrderBtn.click();
     }
     public void orderDoneHeader(){
-
-            WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(10));
             // h1 elementini bulamiyor bekleme atmamiz lazim
             WebElement orderHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("//h1[contains(text(),'Your order has been placed!')]")
@@ -181,7 +172,6 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void selectCountry() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(countrySelect));
         Select countryDropdown = new Select(countrySelect);
         // "United Kingdom" seçiyoruz
@@ -189,7 +179,6 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void selectRegion() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(regionSelect));
         Select regionDropdown = new Select(regionSelect);
         //index 1'den başlayarak rastgele bir bölge seçtiriyoruz index 0 select region oldugu icin

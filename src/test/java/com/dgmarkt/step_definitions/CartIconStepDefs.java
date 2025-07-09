@@ -41,7 +41,7 @@ public class CartIconStepDefs {
     @When("User adds a product to cart")
     public void user_adds_a_product_to_cart() {
         mainPage.navigateCategoryDropdown("Televisions");
-        cartIconPage.addTheProductCartWithHover(5);
+        cartIconPage.addTheProductCartWithHover(8);
     }
 
     @Then("{string} message is displayed")

@@ -20,10 +20,14 @@ public class CheckOutStepDefs {
 
     @When("User clicks the {string} button")
     public void user_clicks_the_button(String string) {
+        BrowserUtils.waitFor(3);
         shoppingCartPage.ClickCheckOutInCartIcon();
+
+
     }
     @Then("The user fills in the {string} page and clicks {string} button.")
     public void the_user_fills_in_the_page_and_clicks_button(String string, String string2) {
+
      shoppingCartPage.CheckoutOptionsCoBttn();
      BrowserUtils.waitForClickablility(By.id("input-payment-firstname"),3);
      shoppingCartPage.fillAllBillingDetails();

@@ -1,18 +1,12 @@
 package com.dgmarkt.pages;
-
 import com.dgmarkt.utilities.BrowserUtils;
 import com.dgmarkt.utilities.Driver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.List;
 
-import static com.dgmarkt.utilities.Driver.driver;
+
 
 public class CheckoutPage extends BasePage {
 
@@ -54,6 +48,8 @@ public class CheckoutPage extends BasePage {
 
     // Method: Dinamik stokta varmi yok mu olarak kontrol ederek urunu sepete ekletiyoruz
     public void addProductToCartWithStock() {
+        BrowserUtils.waitFor(3);
+        //BrowserUtils.waitForVisibility(By.xpath("//a[@class='a-top-link']//span[text()='Category']"),5);
         mainPage.clickMainButton("Category");
         mainPage.clickSubButton("Televisions");
 
@@ -83,14 +79,6 @@ public class CheckoutPage extends BasePage {
 
 
 ///------------------Seneryo2 User adds a product to cart with "Search" button -------------------------///////
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-
-
-
-
-
-
 
 }
 
