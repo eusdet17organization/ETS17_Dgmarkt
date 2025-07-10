@@ -17,9 +17,9 @@ Feature: Cart Button Management
 
 
   Scenario: User adds a product to cart with "Search" button
-    Then User click the search icon
-    Then User searches for the product in the search bar
+    Then When User click the search icon "Cello C4320DVB 43" and search
     And  User click the product and "Add To Cart" button
+
 
 
 

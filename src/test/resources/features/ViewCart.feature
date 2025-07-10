@@ -5,7 +5,8 @@ Feature: Access the cart from the "View Cart" button
     Given User is on the login page
     Given User enters valid credentials
     Given User verifies that main page is visible
-    When User adds a product to cart
+    When When User click the search icon "Cello C4020G" and search
+    When User add to cart product with hover
     And  User clicks on cart icon
 
 

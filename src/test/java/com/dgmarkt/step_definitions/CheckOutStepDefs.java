@@ -1,5 +1,7 @@
 package com.dgmarkt.step_definitions;
 
+import com.dgmarkt.pages.CartIconPage;
+import com.dgmarkt.pages.CheckoutPage;
 import com.dgmarkt.pages.LoginPage;
 import com.dgmarkt.pages.ShoppingCartPage;
 
@@ -7,6 +9,8 @@ import com.dgmarkt.utilities.BrowserUtils;
 import com.dgmarkt.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.checkerframework.checker.units.qual.C;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,7 +21,16 @@ public class CheckOutStepDefs {
 
    ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
 
+   CartIconPage cartIconPage = new CartIconPage();
 
+   CheckoutPage checkoutPage = new CheckoutPage();
+ @When("User click the product and {string} button and click")
+ public void user_click_the_product_and_button_and_click(String string) {
+  cartIconPage.addTheProductCartWithHover(0);
+  cartIconPage.clickCartIcon();
+  checkoutPage.CheckOutBtnInCart();
+
+ }
     @When("User clicks the {string} button")
     public void user_clicks_the_button(String string) {
         shoppingCartPage.ClickCheckOutInCartIcon();

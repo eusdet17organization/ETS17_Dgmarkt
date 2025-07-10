@@ -24,9 +24,11 @@ import static com.dgmarkt.utilities.Driver.driver;
 public class CartIconStepDefs {
 
 
+    SearchPage searchPage = new SearchPage();
     LoginPage loginPage = new LoginPage();
     MainPage mainPage = new MainPage();
     CartIconPage cartIconPage = new CartIconPage();
+    protected  String product;
 
     @Given("User clicks on cart icon")
     public void user_clicks_on_cart_icon() {
@@ -38,10 +40,23 @@ public class CartIconStepDefs {
         System.out.println(cartIconPage.getEmptyCartMessage());
     }
 
+
     @When("User adds a product to cart")
     public void user_adds_a_product_to_cart() {
-        mainPage.navigateCategoryDropdown("Televisions");
-        cartIconPage.addTheProductCartWithHover(5);
+        BrowserUtils.waitForClickablility(searchPage.searchIcon,5);
+        searchPage.searchIcon.click();
+        BrowserUtils.waitForClickablility(searchPage.searchText,5);
+        searchPage.searchText.sendKeys(product);
+        this.product=product;
+        BrowserUtils.waitForClickablility(searchPage.searchIconWithSearchText,5);
+        searchPage.searchIconWithSearchText.click();
+        cartIconPage.addTheProductCartWithHover(0);
+
+    }
+
+    @When("User add to cart product with hover")
+    public void user_add_to_cart_product_with_hover() {
+        cartIconPage.addTheProductCartWithHover(0);
     }
 
     @Then("{string} message is displayed")
@@ -57,7 +72,7 @@ public class CartIconStepDefs {
     public void user_should_see_added_product_in_cart() throws InterruptedException {
 
         cartIconPage.keepCartDropdownOpen();
-        cartIconPage.saveProductDetails();
+        cartIconPage.saveProductDetails(product);
         Thread.sleep(1000);
 
     }

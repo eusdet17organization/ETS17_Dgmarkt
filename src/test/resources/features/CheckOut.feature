@@ -4,14 +4,15 @@ Feature: Checkout page and completion of payment
     Given User is on the login page
     Given User enters valid credentials
     Given User verifies that main page is visible
-    When User adds a product to cart
-    And  User clicks on cart icon
+    When User click the search icon "Cello C4320DVB 43" and search
+    When User click the product and "Add To Cart" button and click
+
 
 
 
 
   Scenario: Go to the checkout page from the cart icon and complete the checkout process
-    When  User clicks the "Checkout" button
+
     Then  The user fills in the "Billing Details" page and clicks "Continue" button.
     Then  In the "Delivery Details" section, the user selects "I want to use an existing address" and clicks the "Continue" button
     Then  Select "I have read and accept the Terms and Conditions" on the "Delivery Method" page and click on the "Continue" button.

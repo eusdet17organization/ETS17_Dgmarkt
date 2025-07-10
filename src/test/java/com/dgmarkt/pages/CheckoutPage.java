@@ -77,7 +77,9 @@ public class CheckoutPage extends BasePage {
     // Method: Dinamik stokta varmi yok mu olarak kontrol ederek urunu sepete ekletiyoruz
 
     public void addProductToCartWithStock() {
-        mainPage.clickSubButton("Televisions");
+
+        mainPage.hoverCategoryButton();
+        mainPage.navigateCategoryDropdown("Televisions");
 
         for (int i = 0; i < productName.size(); i++) {
             productName.get(i).click();
@@ -97,15 +99,15 @@ public class CheckoutPage extends BasePage {
         viewCartIcon.click();
         checkOutButton.click();
         shoppingCartPage.billingDetailsContinueButton.click();
-        BrowserUtils.waitFor(2);
+        BrowserUtils.waitForClickablility(shoppingCartPage.deliverDetailsContinueButton,2);
         shoppingCartPage.deliverDetailsContinueButton.click();
-        BrowserUtils.waitFor(2);
+        BrowserUtils.waitForClickablility(shoppingCartPage.deliveryMethodContinueButton,2);
         shoppingCartPage.deliveryMethodContinueButton.click();
-        BrowserUtils.waitFor(2);
+
 
         //shoppingCartPage.privacyPolicyCheckbox.click();
         shoppingCartPage.clickPaymentMethodContinueButton();
-        BrowserUtils.waitFor(2);
+        BrowserUtils.waitForClickablility(shoppingCartPage.confirmOrderBtn,2);
 
         unitPrice = confirmOrderTableUnitPrice.getText();
 
