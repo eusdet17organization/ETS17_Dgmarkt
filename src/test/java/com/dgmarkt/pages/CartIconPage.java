@@ -1,5 +1,6 @@
 package com.dgmarkt.pages;
 
+import com.dgmarkt.step_definitions.CartIconStepDefs;
 import com.dgmarkt.utilities.BrowserUtils;
 import com.dgmarkt.utilities.Driver;
 import org.junit.Assert;
@@ -42,7 +43,7 @@ public class CartIconPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(),'View Cart')]")
     private WebElement viewCartButton;
 
-    SearchPage searchPage=new SearchPage();
+
 
     public String celloTvPrice;
 
@@ -59,8 +60,7 @@ public class CartIconPage extends BasePage {
 
     public void addTheProductCartWithHover(int productIndex) {
 
-        currencyText.click();
-        Driver.get().findElement(By.xpath("//button[text()='$ US Dollar']")).click();
+
 
         try {
             // Tüm cart butonlarını listeye koy
@@ -135,6 +135,8 @@ public class CartIconPage extends BasePage {
     //////////----------------------------------------- dinamik cart icon icindeki urunun bilgilerini kontrol etme
 
 
+
+
     public void keepCartDropdownOpen() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.querySelector('#cart').classList.add('open');");
@@ -142,12 +144,26 @@ public class CartIconPage extends BasePage {
     }
 
 
+
+    SearchPage searchPage = new SearchPage();
+
+    String product;
+      public void searchBar (String product){
+          searchPage.searchIcon.click();
+          BrowserUtils.waitFor(1);
+          searchPage.searchText.sendKeys(product);
+          this.product=product;
+          searchPage.searchIconWithSearchText.click();
+    }
+
+
+
     protected String selectedProductName;
     protected String selectedProductPrice;
     protected String selectedProductQuantity;
 
 
-    public void saveProductDetails() {
+    public void saveProductDetails(String product) {
         BrowserUtils.waitForVisibility(productNameInCart, 10);
         selectedProductName = productNameInCart.getText();
         selectedProductPrice = productPriceInCart.getText();

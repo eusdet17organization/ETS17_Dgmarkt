@@ -32,12 +32,7 @@ public class CheckOutStepGeneralDefs {
 
     @When("User adds a product to cart with {string} button")
     public void user_adds_a_product_to_cart_with_button(String string) {
-
-        BrowserUtils.waitFor(2);
-
-
         BrowserUtils.waitFor(5);
-
         checkoutPage.addProductToCartWithStock();
     }
 
@@ -53,20 +48,27 @@ public class CheckOutStepGeneralDefs {
 
     }
 
-    @Then("User searches for the product in the search bar")
-    public void user_searches_for_the_product_in_the_search_bar() {
-
-        searchPage.searchText.sendKeys("Cello C4020G 40\" Smart LED TV");
+    protected String product;
+    @Then("When User click the search icon {string} and search")
+    public void when_user_click_the_search_icon_and_search(String product) {
+        BrowserUtils.waitForClickablility(searchPage.searchIcon,5);
+        searchPage.searchIcon.click();
+        BrowserUtils.waitForClickablility(searchPage.searchText,5);
+        searchPage.searchText.sendKeys(product);
+        this.product=product;
+        BrowserUtils.waitForClickablility(searchPage.searchIconWithSearchText,5);
         searchPage.searchIconWithSearchText.click();
-
-
     }
 
     @Then("User click the product and {string} button")
     public void user_click_the_product_and_button(String string) {
         cartIconPage.addTheProductCartWithHover(0);
         cartIconPage.clickCartIcon();
+        Assert.assertTrue(Driver.get().findElement(By.partialLinkText(product)).getText().contains(product));
+        System.out.println(" : Product details have been successfully verified:");
+        System.out.println(" : Name: " + cartIconPage.getProductName());
         checkoutPage.CheckOutBtnInCart();
+
     }
 
 }
