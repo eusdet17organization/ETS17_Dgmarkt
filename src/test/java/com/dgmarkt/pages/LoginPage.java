@@ -4,6 +4,7 @@ import com.dgmarkt.utilities.BrowserUtils;
 import com.dgmarkt.utilities.ConfigurationReader;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -130,6 +131,14 @@ public class LoginPage extends BasePage {
         myAccountLoginPasswordBox.sendKeys(password);
         myAccountLoginButtonSubmit.click();
         BrowserUtils.waitForVisibility(loginFiveAttemptsErrorMessage, 5);
+    }
+
+    public void userLoginWithEnterPress() {
+        myAccountDropdown.click();
+        myAccountLoginText.click();
+        myAccountLoginEmailAddressBox.sendKeys(ConfigurationReader.get("userEmailAddress"));
+        myAccountLoginPasswordBox.sendKeys(ConfigurationReader.get("userPassword"));
+        myAccountLoginPasswordBox.sendKeys(Keys.ENTER);
     }
 
 

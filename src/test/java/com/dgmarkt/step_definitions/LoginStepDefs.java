@@ -13,6 +13,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import static com.dgmarkt.utilities.Driver.driver;
@@ -120,5 +121,9 @@ public class LoginStepDefs extends BasePage {
         Assert.assertEquals("Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.\n" + "×", loginPage.loginFiveAttemptsErrorMessage.getText());
     }
 
+    @When("The user clicks on My Account button and clicks on Login button after presses Enter")
+    public void the_user_clicks_on_my_account_button_and_clicks_on_login_button_after_presses_enter() {
+        loginPage.userLoginWithEnterPress();
+    }
 
 }
