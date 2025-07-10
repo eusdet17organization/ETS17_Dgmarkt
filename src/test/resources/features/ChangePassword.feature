@@ -31,7 +31,7 @@ Feature: Change Password Functionality
     And   The user navigates to the change password page
     And   The user tries to change the password without filling any fields.
     Then  It is confirmed that the password change was unsuccessful.
-  @wip
+
   Scenario: Password change using the current password.
     When  The user logs into the account
     And   The user navigates to the change password page

@@ -1,10 +1,10 @@
-@wip
+
 Feature: Wist List
   Background:
     Given User is on the login page
     Given User enters valid credentials
     Given User verifies that main page is visible
-
+@wip
   Scenario: Add To Wist List
     Then The user Login with MyAccount page
     When User click the search icon "Cello C4020G" and search

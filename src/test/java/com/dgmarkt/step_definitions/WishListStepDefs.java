@@ -32,12 +32,12 @@ public class WishListStepDefs {
     @When("User click the search icon {string} and search")
     public void user_click_the_search_icon_and_search(String product) {
 
-        BrowserUtils.waitFor(1);
+        BrowserUtils.waitForClickablility(searchPage.searchIcon,5);
         searchPage.searchIcon.click();
-        BrowserUtils.waitFor(1);
+        BrowserUtils.waitForClickablility(searchPage.searchText,5);
         searchPage.searchText.sendKeys(product);
         this.product=product;
-        BrowserUtils.waitFor(1);
+        BrowserUtils.waitForClickablility(searchPage.searchIconWithSearchText,5);
         searchPage.searchIconWithSearchText.click();
 
 
